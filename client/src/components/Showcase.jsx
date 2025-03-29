@@ -49,7 +49,7 @@ const Showcase = () => {
 		          	<MdOutlineChevronRight className="h-5 w-5 text-gray-500" />
 		        </span>
 	      	</div>
-	      	<div className="mt-5 flex items-center space-x-2 absolute left-1/2 bottom-25 lg:bottom-15 transform -translate-x-1/2 z-50">
+	      	<div className="mt-5 flex items-center space-x-2 absolute left-1/2 bottom-25 lg:bottom-18 transform -translate-x-1/2 z-50">
 		        {showcaseContent.map((_, index) => (
 		          	<button key={index} onClick={() => setCurrentIndex(index)} className={`rounded-full border border-amber-500 ${currentIndex === index ? "bg-amber-500 w-3 h-3" : "bg-gray-100 w-2 h-2"} transition-all delay-300`}
 		          	></button>

@@ -39,7 +39,7 @@ const SearchBar = ({ onSubmit }) => {
 	const formData = { checkInDate, checkOutDate, destination }
 	console.log(formData)
 	return (
-		<form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-5  h-fit lg:min-h-28 bg-white shadow-md shadow-gray-300 w-4/5 divide-gray-300 divide-y-1 lg:divide-x-1 mx-auto   absolute left-1/2 -bottom-80 lg:bottom-15 transform -translate-x-1/2 z-50">
+		<form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-5  h-fit lg:min-h-28 bg-white shadow-lg shadow-gray-300 w-4/5 divide-gray-300 divide-y-1 lg:divide-x-1 mx-auto   absolute left-1/2 -bottom-80 lg:-bottom-14 transform -translate-x-1/2 z-50">
 			<div className="flex flex-col space-y-3 h-full p-4 justify-center">
 				<p className="text-sm font-semibold text-orange-600">DESTINATION</p>
 				<span className="flex space-x-1 items-center">

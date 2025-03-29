@@ -2,7 +2,7 @@ import React from 'react'
 
 const Offers = () => {
 	return (
-		<div className="w-full h-screen lg:h-4/5 flex flex-col bg-white justify-center items-center mt-70 lg:mt-2 px-5 md:px-10 lg:px-30">
+		<div className="w-full h-screen lg:h-4/5 flex flex-col bg-white justify-center items-center mt-70 lg:mt-40 px-5 md:px-10 lg:px-30">
 			<span className="flex flex-col items-center space-y-4 my-3">
 				<p className="text-4xl text-black font-bold">Offers</p>
 				<p className="text-sm font-normal text-gray-400">Promotions, deals, and special offers for you</p>
