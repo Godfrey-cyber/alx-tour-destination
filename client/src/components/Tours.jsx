@@ -3,7 +3,7 @@ import { tours } from "../utilities/utiles.js"
 
 const Tours = () => {
 	return (
-		<div className="w-full h-screen flex flex-col justify-center items-center px-30">
+		<div className="w-full h-fit lg:h-screen flex flex-col justify-center items-center px-5 md:px-10 lg:px-30">
 			<span className="flex flex-col items-center space-y-4 my-3">
 				<p className="text-lg font-semibold text-orange-600">Destination</p>
 				<p className="text-4xl text-black font-bold">Tour Destinations</p>

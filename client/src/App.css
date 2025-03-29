@@ -12,8 +12,10 @@
     right: 0;
     bottom: 0;
     content: '';
-    opacity: .3;
+    opacity: .6;
     background: #000000;
+/*    transition-all: 2*/
+/*    background-color: rgba(0,0,0,0.9);*/
 }
 
 .hero-wrap {

@@ -9,9 +9,9 @@ import Footer from "../components/Footer.jsx"
 
 const Home = () => {
 	return (
-		<section className="w-full min-h-screen bg-transparent">
+		<section className="w-full h-full bg-transparent">
 			<Showcase />
-			<Content />
+			{/*<Content />*/}
 			<Offers />
 			<Destinations />
 			<Discounts />

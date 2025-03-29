@@ -18,7 +18,7 @@ import { lazy, Suspense } from "react";
 function App() {
 
     return (
-        <section className="min-h-screen font-['Montserrat'] scroll-smooth w-screen overflow-x-hidden">
+        <section className="min-h-screen font-['Montserrat'] scroll-smooth w-full overflow-x-hidden">
             <ToastContainer />
              <BrowserRouter>
                 <Routes>
