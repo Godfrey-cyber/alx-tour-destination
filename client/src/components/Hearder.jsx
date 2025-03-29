@@ -1,6 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { FaBarsStaggered } from "react-icons/fa6";
+import CartModal from "./CartModal.jsx"
 
 const Hearder = () => {
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const openMenuBar = () => {
+        setIsModalOpen(true);
+    };
 	return (
 		<div className="flex items-center justify-between w-full bg-transparent absolute px-5 md:px-10 lg:px-30 h-20 z-50">
 			<div className="flex flex-col group cursor-pointer">
@@ -14,6 +20,13 @@ const Hearder = () => {
 				<p className="text-sm font-normal text-white font-semibold hover:text-orange-500 cursor-pointer transition-all delay-300">Hotel</p>
 				<p className="text-sm font-normal text-white font-semibold hover:text-orange-500 cursor-pointer transition-all delay-300">Blog</p>
 			</div>
+			<FaBarsStaggered onClick={() => openMenuBar()} className="flex lg:hidden h-8 w-8 text-white cursor-pointer" />
+			<CartModal 
+                isOpen={isModalOpen} 
+                onClose={() => setIsModalOpen(false)} 
+                // cartItems={cartItems} 
+                // removeFromCart={removeFromCart} 
+            />
 		</div>
 	)
 }

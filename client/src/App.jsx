@@ -9,6 +9,7 @@ import './App.css'
 import Login from "./pages/Login.jsx"
 import SignUp from "./pages/SignUp.jsx"
 import Home from "./pages/Home.jsx"
+import LandingPage from "./pages/LandingPage.jsx"
 import { lazy, Suspense } from "react";
 
 // const Login = lazy(() => import("./pages/Login.jsx"));
@@ -22,7 +23,8 @@ function App() {
             <ToastContainer />
              <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route path="/" element={<LandingPage />} />
+                    <Route path="/home" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<SignUp />} />
                 </Routes>

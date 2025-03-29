@@ -19,12 +19,15 @@ const Content = () => {
 				</div>
 				<div className="flex flex-col space-y-4 h-96 justify-center p-4">
 					<p className="text-lg font-semibold text-orange-600">Welcome to Pacific</p>
-					<p className="text-4xl font-bold text-black">It's time to start your adventure.</p>
-					<p className="text-sm font-normal text-gray-500 my-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-					<p className="text-sm font-normal text-gray-500 my-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+					<p className="text-4xl font-bold text-black">Seamless Booking, Just a Few Clicks Away!</p>
+					<p className="text-sm font-normal text-gray-500 my-4">Planning your next adventure has never been easier! With our hassle-free booking feature, you can reserve your dream destination, hotel, or experience in just a few simple steps.</p>
+					<p className="text-sm font-normal text-gray-500 my-4">Whether you're booking a weekend getaway, an exciting tour, or a luxury stay, our platform ensures a smooth and effortless process from start to finish.</p>
 					<button className="text-sm font-semibold text-white bg-orange-600 w-fit rounded-full px-6 py-3 my-4">Search Destination</button>
 				</div>
 			</div>
+
+
+			
 		</div>
 	)
 }
