@@ -7,7 +7,7 @@ const Hearder = () => {
 				<p className="text-2xl font-bold text-white group-hover:text-orange-500 transition-all delay-300">Pacific</p>
 				<p className="text-xs font-semibold text-orange-500 group-hover:text-white transition-all delay-300">TRAVEL AGENCY</p>
 			</div>
-			<div className="flex items-center space-x-3">
+			<div className="flex items-center space-x-5">
 				<p className="text-sm font-normal text-white font-semibold hover:text-orange-500 cursor-pointer transition-all delay-300">Home</p>
 				<p className="text-sm font-normal text-white font-semibold hover:text-orange-500 cursor-pointer transition-all delay-300">About</p>
 				<p className="text-sm font-normal text-white font-semibold hover:text-orange-500 cursor-pointer transition-all delay-300">Destination</p>

@@ -5,10 +5,10 @@ const Content = () => {
 	return (
 		<div className="flex flex-col justify-center items-center min-h-screen px-5 md:px-10 lg:px-20 w-full my-20">
 			<div className="grid grid-cols-12 gap-8">
-				<div className="flex flex-col col-span-6 max-h-96 justify-center p-4">
-					<div className="grid grid-cols-2 gap-4">
+				<div className="flex flex-col col-span-12 lg:col-span-6 max-h-96 justify-center p-4">
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 						{showcaseContent2.map(data => (
-							<div key={data.id} className="relative flex flex-col space-y-4 h-36 bg-red-100 h-72 p-4 justify-center">
+							<div key={data.id} className="relative flex flex-col space-y-4 bg-red-100 h-72 p-4 justify-center">
 								<p className="text-sm z-50 font-bold text-orange-600 my-4">{data.title}</p>
 								<p className="text-sm z-50 font-semibold text-white my-1">{data.large}</p>
 								<img className="absolute top-0 left-0 bottom-0 h-full w-full object-cover" src={data.image} alt="" />
