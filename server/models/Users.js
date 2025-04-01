@@ -5,10 +5,10 @@ import bcrypt from "bcryptjs"
 const UserSchema = new mongoose.Schema({
     firstName: { type: String, unique: true, min: 4, required: true },
 	lastName: { type: String, unique: true, min: 4, required: true },
-    password: { type: String, required: true },
+    password: { type: String, required: true, select: false },
 	email: { type: String, required: true },
-    isAdmin: { type: Boolean, default: false, required: true },
-    verified: { type: Boolean, required: true, default: false }
+    isAdmin: { type: Boolean, default: false },
+    verified: { type: Boolean, default: false }
 }, { timestamps: true })
 
 //encrypt password before saving

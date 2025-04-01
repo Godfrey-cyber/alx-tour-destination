@@ -4,8 +4,11 @@ import cookieParser from "cookie-parser"
 import dotenv from "dotenv"
 import helmet from "helmet"
 import mongoose from "mongoose"
-import nodemon from "nodemon"
 
+import userRoutes from './routes/users.js'
+import authRoutes from './routes/auth.js'
+
+dotenv.config()
 const app = express()
 app.use(express.json())
 app.use(cookieParser())
@@ -15,13 +18,15 @@ app.use(cors({
 	credentials: true
 }))
 
-const MONGO_URL = process.env.MONGODB_URL
 const PORT = process.env.PORT || 5000
 
-// mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true});
-// mongoose.connection.on("disconnected", (error) => {
-//     console.log("❌ MongoDatabase disconnected❗", error)
-// });
+mongoose.connect(process.env.MONGODB_URL);
+mongoose.connection.on("disconnected", (error) => {
+    console.log("❌ MongoDatabase disconnected❗", error)
+});
+
+app.use('/api/v1/users', userRoutes)
+app.use('/api/v1/auth', authRoutes)
 
 app.listen(PORT, () => {
     console.log(`Success 💯! Servers running on port: ${PORT} 👍`)
