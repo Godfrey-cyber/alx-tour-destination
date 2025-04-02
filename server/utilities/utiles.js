@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken'
+import mongoose from 'mongoose'
 
 //Create Access Token
 export const createAccessToken = (userId) => {
@@ -32,5 +33,13 @@ export const validatePassword = (password) => {
     throw new Error(
       '🚫 Password must be between 8 to 15 characters containing at least one lowercase letter, one uppercase letter, one numeric digit, and one special character'
     )
+  }
+}
+
+export const mongoDbConnection = (res) => {
+  if (mongoose.connection.readyState !== 1) {
+    return res
+      .status(500)
+      .json({ status: 'Fail', msg: 'Database not connected' })
   }
 }

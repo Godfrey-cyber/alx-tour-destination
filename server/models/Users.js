@@ -9,6 +9,7 @@ const UserSchema = new mongoose.Schema(
     password: { type: String, required: true, select: false },
     email: { type: String, required: true },
     isAdmin: { type: Boolean, default: false },
+    refreshTokens: [{ type: String }],
     verified: { type: Boolean, default: false },
   },
   { timestamps: true }

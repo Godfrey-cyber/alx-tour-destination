@@ -78,6 +78,8 @@ export const login = async (req, res) => {
     const accessToken = createAccessToken(user._id)
     const refreshToken = createRefreshToken(user._id)
 
+    user.refreshTokens.push(refreshToken)
+    await user.save()
     // Send refresh token to the front-end
     res.cookie('refreshToken', refreshToken, {
       path: '/',
@@ -92,6 +94,30 @@ export const login = async (req, res) => {
     return res.status(500).json({ message: error.message })
   }
 }
+
+// logout user
+export const logout = async (req, res) => {
+  try {
+    const refreshToken = req.cookies.refreshToken
+    if (!refreshToken) return res.status(400).json({ msg: '🚫 No refresh token provided' })
+
+    // Find user and remove refresh token
+    const user = await User.findOneAndUpdate(
+      { refreshTokens: refreshToken },
+      { $pull: { refreshTokens: refreshToken } },
+      { new: true }
+    )
+
+    if (!user) return res.status(400).json({ msg: '🚫 Invalid refresh token' })
+
+    res.clearCookie('refreshToken', { path: '/' })
+    res.status(200).json({ msg: '✅ Logged out successfully' })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ msg: '❌ Server error' })
+  }
+}
+
 
 // Change Password
 export const changePassword = async (req, res) => {
@@ -139,5 +165,37 @@ export const changePassword = async (req, res) => {
       .json({ message: '✅ Password has been changed successfully!' })
   } catch (error) {
     res.status(500).json({ message: error.message })
+  }
+}
+
+// Refresh Access Token
+export const refreshAccessToken = async (req, res) => {
+  try {
+    const refreshToken = req.cookies.refreshToken
+
+    if (!refreshToken) {
+      return res.status(401).json({ msg: '🚫 No refresh token provided' })
+    }
+
+    // Verify refresh token
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, async (err, decoded) => {
+      if (err) {
+        return res.status(403).json({ msg: '🚫 Invalid refresh token' })
+      }
+
+      // Check if user exists
+      const user = await User.findById(decoded.userId)
+      if (!user || !user.refreshTokens.includes(refreshToken)) {
+        return res.status(403).json({ msg: '🚫 User not found' })
+      }
+
+      // Generate new access token
+      const newAccessToken = createAccessToken(user._id)
+
+      res.status(200).json({ accessToken: newAccessToken })
+    })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ msg: '❌ Server error' })
   }
 }
