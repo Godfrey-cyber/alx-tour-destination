@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema(
     lastName: { type: String, unique: true, min: 4, required: true },
     password: { type: String, required: true, select: false },
     email: { type: String, required: true },
-    isAdmin: { type: Boolean, default: false },
+    role: { type: Boolean, default: false },
     refreshTokens: [{ type: String }],
     verified: { type: Boolean, default: false },
   },

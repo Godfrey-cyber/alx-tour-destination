@@ -43,3 +43,63 @@ export const mongoDbConnection = (res) => {
       .json({ status: 'Fail', msg: 'Database not connected' })
   }
 }
+
+// export const sendEmail = async (to, subject, text) => {
+//   const transporter = nodemailer.createTransport({
+//     service: 'gmail',
+//     auth: {
+//       user: process.env.EMAIL_USER,
+//       pass: process.env.EMAIL_PASS,
+//     },
+//   })
+
+//   const mailOptions = {
+//     from: process.env.EMAIL_USER,
+//     to,
+//     subject,
+//     text,
+//   }
+
+//   return transporter.sendMail(mailOptions)
+// }
+// export const login = async (req, res) => {
+//   try {
+//     const { email, password, device } = req.body
+//     if (!email || !password) {
+//       return res.status(400).json({ msg: '❌ Please fill in all fields' })
+//     }
+
+//     const user = await User.findOne({ email }).select('+password')
+//     if (!user) {
+//       return res.status(400).json({ msg: '🚫 This email does not exist!' })
+//     }
+
+//     const isPasswordCorrect = await bcrypt.compare(password, user.password)
+//     if (!isPasswordCorrect) {
+//       return res.status(400).json({ msg: '🚫 Invalid email or password.' })
+//     }
+
+//     // Limit to 3 active devices
+//     if (user.refreshTokens.length >= 3) {
+//       return res.status(400).json({ msg: '🚫 Max active devices reached. Please log out from other devices.' })
+//     }
+
+//     const accessToken = createAccessToken(user._id, user.role)
+//     const refreshToken = createRefreshToken(user._id)
+
+//     user.refreshTokens.push({ token: refreshToken, device: device || 'Unknown' })
+//     await user.save()
+
+//     res.cookie('refreshToken', refreshToken, {
+//       httpOnly: true,
+//       maxAge: 7 * 24 * 60 * 60 * 1000,
+//       sameSite: 'Strict',
+//       secure: process.env.NODE_ENV === 'production',
+//     })
+
+//     res.status(200).json({ accessToken, msg: '🎉 Login successful!' })
+//   } catch (error) {
+//     console.error(error)
+//     res.status(500).json({ message: error.message })
+//   }
+// }
