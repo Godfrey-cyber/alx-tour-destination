@@ -2,7 +2,7 @@ import React from 'react'
 
 const About = () => {
 	return (
-		<div className="flex flex-col justify-center items-center h-fit px-5 md:px-10 lg:px-20 w-full my-20 md:my-10 lg:my-20">
+		<div className="flex flex-col justify-center items-center h-full px-5 md:px-10 lg:px-20 w-full my-20 md:my-10 lg:my-20">
 			<div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 w-full h-full">
 				<div className="flex flex-col space-y-4 h-full justify-center p-4">
 					<p className="text-lg font-semibold text-orange-600">Welcome to Pacific</p>
@@ -20,7 +20,7 @@ const About = () => {
 						{/*<div className="relative flex flex-col space-y-4 bg-red-100 h-72 p-4 justify-center">*/}
 							{/*<p className="text-sm z-50 font-bold text-orange-600 my-4">{data.title}</p>*/}
 							{/*<p className="text-sm z-50 font-semibold text-white my-1">{data.large}</p>*/}
-							<img className="h-full w-full object-cover" src="https://images.pexels.com/photos/2166553/pexels-photo-2166553.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
+							<img className="h-full w-full object-cover border-t-4 border-orange-600" src="https://images.pexels.com/photos/2166553/pexels-photo-2166553.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
 							{/*<div className="overlay"></div>*/}
 						{/*</div>*/}
 					{/*</div>*/}

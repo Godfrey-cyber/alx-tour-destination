@@ -1,7 +1,14 @@
-apiCalls.js
 import axios from "axios";
+import { loginStart, loginFailure, loginSuccess } from "../redux/authSlice.js"
+import { axiosInstance } from "./utiles.js"
 
-export const axiosInstance = axios.create({
-    baseURL: "http://localhost:5000",
-    withCredentials: true, // Allows cookies (refresh token)
-});
+export const loginUser = (email, password) => async (dispatch) => {
+  dispatch(loginStart());
+  try {
+    const response = await axiosInstance.post('/login-user', { email, password });
+    dispatch(loginSuccess(response.data));
+  } catch (error) {
+    dispatch(loginFailure(error.response.data.msg || error.message));
+  }
+};
+

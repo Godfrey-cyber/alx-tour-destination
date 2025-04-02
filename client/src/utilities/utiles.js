@@ -1,3 +1,9 @@
+import axios from "axios"
+export const axiosInstance = axios.create({
+    baseURL: "http://localhost:5000/api/v1", // api base url
+    withCredentials: true, // Allows cookies (refresh token)
+});
+
 export const showcaseContent = [
 	{
 		id: 1,

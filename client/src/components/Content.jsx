@@ -3,7 +3,7 @@ import { showcaseContent2 } from "../utilities/utiles.js"
 
 const Content = () => {
 	return (
-		<div className="flex flex-col justify-center items-center min-h-screen px-5 md:px-10 lg:px-20 w-full my-5 md:my-10 lg:my-20">
+		<div className="flex flex-col justify-center items-center h-screen px-5 md:px-10 lg:px-20 w-full my-5 md:my-10 lg:my-20">
 			<div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
 				<div className="flex flex-col max-h-96 justify-center p-4">
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
