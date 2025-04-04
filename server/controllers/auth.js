@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs'
 import User from '../models/Users.js'
+import jwt from "jasonwebtoken"
 import {
   createRefreshToken,
   createAccessToken,
@@ -7,7 +8,7 @@ import {
   validatePassword,
 } from '../utilities/utiles.js'
 
-export const register = async (req, res) => {
+export const register = async (req, res, next) => {
   try {
     const { firstName, lastName, password, email } = req.body
 
@@ -42,11 +43,11 @@ export const register = async (req, res) => {
     return res.status(201).json({ msg: 'User Registration successfull🥇' })
   } catch (error) {
     console.log(error)
-    res.status(500).json({ message: error.message })
+    next(error)
   }
 }
 
-export const login = async (req, res) => {
+export const login = async (req, res, next) => {
   try {
     const { password, email } = req.body
     if (!email || !password) {
@@ -91,15 +92,16 @@ export const login = async (req, res) => {
     res.status(200).json({ accessToken, msg: 'Login successfull🥇' })
   } catch (error) {
     console.log(error.message)
-    return res.status(500).json({ message: error.message })
+    next(error)
   }
 }
 
 // logout user
-export const logout = async (req, res) => {
+export const logout = async (req, res, next) => {
   try {
     const refreshToken = req.cookies.refreshToken
-    if (!refreshToken) return res.status(400).json({ msg: '🚫 No refresh token provided' })
+    if (!refreshToken)
+      return res.status(400).json({ msg: '🚫 No refresh token provided' })
 
     // Find user and remove refresh token
     const user = await User.findOneAndUpdate(
@@ -114,13 +116,12 @@ export const logout = async (req, res) => {
     res.status(200).json({ msg: '✅ Logged out successfully' })
   } catch (error) {
     console.error(error)
-    res.status(500).json({ msg: '❌ Server error' })
+    next(error)
   }
 }
 
-
 // Change Password
-export const changePassword = async (req, res) => {
+export const changePassword = async (req, res, next) => {
   try {
     const { previousPassword, password } = req.body
     // Validate user fields
@@ -164,12 +165,12 @@ export const changePassword = async (req, res) => {
       .status(200)
       .json({ message: '✅ Password has been changed successfully!' })
   } catch (error) {
-    res.status(500).json({ message: error.message })
+    next(error)
   }
 }
 
 // Refresh Access Token
-export const refreshAccessToken = async (req, res) => {
+export const refreshAccessToken = async (req, res, next) => {
   try {
     const refreshToken = req.cookies.refreshToken
 
@@ -178,24 +179,28 @@ export const refreshAccessToken = async (req, res) => {
     }
 
     // Verify refresh token
-    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, async (err, decoded) => {
-      if (err) {
-        return res.status(403).json({ msg: '🚫 Invalid refresh token' })
+    jwt.verify(
+      refreshToken,
+      process.env.REFRESH_TOKEN_SECRET,
+      async (err, decoded) => {
+        if (err) {
+          return res.status(403).json({ msg: '🚫 Invalid refresh token' })
+        }
+
+        // Check if user exists
+        const user = await User.findById(decoded.userId)
+        if (!user || !user.refreshTokens.includes(refreshToken)) {
+          return res.status(403).json({ msg: '🚫 User not found' })
+        }
+
+        // Generate new access token
+        const newAccessToken = createAccessToken(user._id)
+
+        res.status(200).json({ accessToken: newAccessToken })
       }
-
-      // Check if user exists
-      const user = await User.findById(decoded.userId)
-      if (!user || !user.refreshTokens.includes(refreshToken)) {
-        return res.status(403).json({ msg: '🚫 User not found' })
-      }
-
-      // Generate new access token
-      const newAccessToken = createAccessToken(user._id)
-
-      res.status(200).json({ accessToken: newAccessToken })
-    })
+    )
   } catch (error) {
     console.error(error)
-    res.status(500).json({ msg: '❌ Server error' })
+    next(error)
   }
 }

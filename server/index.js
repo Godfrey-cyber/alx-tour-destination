@@ -30,8 +30,8 @@ mongoose.connection.on('disconnected', (error) => {
 app.use('/api/v1/users', userRoutes)
 app.use('/api/v1/auth', authRoutes)
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Success 💯! Servers running on port: ${PORT} 👍`)
 })
 
-https://github.com/Godfrey-cyber/book-store-server/blob/master/controllers/users.js
+// https://github.com/Godfrey-cyber/book-store-server/blob/master/controllers/users.js
