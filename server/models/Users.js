@@ -8,7 +8,11 @@ const UserSchema = new mongoose.Schema(
     lastName: { type: String, unique: true, min: 4, required: true },
     password: { type: String, required: true, select: false },
     email: { type: String, required: true },
-    role: { type: Boolean, default: false },
+    role: {
+    type: String,
+    enum: ['traveler', 'host', 'admin'],
+    default: 'traveler'
+  },
     refreshTokens: [{ type: String }],
     verified: { type: Boolean, default: false },
   },
