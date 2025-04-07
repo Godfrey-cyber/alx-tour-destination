@@ -1,7 +1,7 @@
 import User from '../models/Users.js'
 import { mongoDbConnection } from '../utilities/utiles.js'
 
-export const allUsers = async (req, res) => {
+export const allUsers = async (req, res, next) => {
 	console.log(req.query.firstName || req.query.lastName)
 	try {
 		await mongoDbConnection()
@@ -15,6 +15,6 @@ export const allUsers = async (req, res) => {
 		return res.status(200).json({ users, status: 'Success', count: users.length })
 	} catch (error) {
 		console.log(error)
-		return res.status(500).json({ status: 'Fail', msg: error.message })
+		next()
 	}
 }

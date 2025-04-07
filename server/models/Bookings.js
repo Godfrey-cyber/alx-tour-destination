@@ -13,6 +13,8 @@ const bookingSchema = new mongoose.Schema({
 	checkIn: Date,
 	checkOut: Date,
 	guests: Number,
+	children: Number,
+	childrenAges: [Number],
 	totalPrice: Number,
 	paymentStatus: {
 		type: String,

@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
 import User from '../models/Users.js'
 import jwt from 'jsonwebtoken'
-import mongoose from 'mongoose'
+
 import { createRefreshToken, createAccessToken, validateEmail, validatePassword } from '../utilities/utiles.js'
 
 export const register = async (req, res, next) => {
@@ -157,6 +157,7 @@ export const changePassword = async (req, res, next) => {
 			message: '✅ Password has been changed successfully!',
 		})
 	} catch (error) {
+		next()
 		console.log(error)
 	}
 }
