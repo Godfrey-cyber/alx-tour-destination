@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import React, { useState } from 'react';
 
 const CartModal = ({ isOpen, onClose }) => {
 	if (!isOpen) return null;
