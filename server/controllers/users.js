@@ -23,11 +23,11 @@ export const allUsers = async (req, res, next) => {
 export const loggedInUser = async (req, res, next) => {
 	try {
 		const user = await User.findById(req.userId).select('-password')
-		if(!user) {
-			return res.status(400).json({ msg: "No user found" })
+		if (!user) {
+			return res.status(400).json({ msg: 'No user found' })
 		}
-		res.status(200).json({ msg: "User retrieved successfully", user })
-	} catch(error) {
+		res.status(200).json({ msg: 'User retrieved successfully', user })
+	} catch (error) {
 		console.log(process.NODE_ENV === 'development' ? error : undefined)
 		next()
 	}

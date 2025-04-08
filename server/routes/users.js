@@ -1,5 +1,5 @@
 import { allUsers, loggedInUser } from '../controllers/users.js'
-import { authenticate } from "../utilities/middleware.js"
+import { authenticate } from '../utilities/middleware.js'
 import express from 'express'
 const router = express.Router()
 

@@ -35,7 +35,6 @@ export const register = async (req, res, next) => {
 		// create a user
 		const newUser = new User({ firstName, lastName, password, email })
 		await newUser.save()
-		console.log('new registered user', newUser)
 		return res.status(201).json({ msg: 'User Registration successfull🥇' })
 	} catch (error) {
 		console.log(error)
@@ -76,7 +75,7 @@ export const login = async (req, res, next) => {
 
 		user.refreshTokens.push(refreshToken)
 		await user.save()
-		
+
 		// console.log(userData)
 		// Send refresh token to the front-end
 		res.cookie('refreshToken', refreshToken, {
