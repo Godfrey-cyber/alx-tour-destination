@@ -39,5 +39,3 @@ const PORT = process.env.PORT || process.env.npm_package_config_port
 app.listen(PORT, () => {
 	console.log(`Success 💯! Servers running on port: ${PORT} 👍`)
 })
-
-// https://github.com/Godfrey-cyber/book-store-server/blob/master/controllers/users.js
