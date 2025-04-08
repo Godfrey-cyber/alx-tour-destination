@@ -32,7 +32,7 @@ const SignUp = () => {
 				if (res.status === 200 || res.statusText === 'OK') {
 					dispatch(signUpSuccess(res.data))
 					setSignUpData({email: "", password: "", firstName: "", lastName: ""})
-	       			navigate('/')
+	       			navigate('/login')
 	       			// toast.success("Successfully Logged in🥇")
 				}
 				console.log(res)

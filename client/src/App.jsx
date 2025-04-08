@@ -22,6 +22,9 @@ import { axiosInstance } from './utilities/utiles.js';
 
 function App() {
 	const dispatch = useDispatch();
+	const { user, loading, error, accessToken, isAuthenticated } = useSelector(
+		state => state.auth
+	);
 
 	useEffect(() => {
 		// On initial load, check if the user is authenticated
@@ -34,11 +37,8 @@ function App() {
 			}
 		};
 		refreshToken();
-	}, [dispatch]);
+	}, [dispatch, isAuthenticated]);
 
-	const { user, loading, error, accessToken } = useSelector(
-		state => state.auth
-	);
 	console.log(user)
 
 	return (
