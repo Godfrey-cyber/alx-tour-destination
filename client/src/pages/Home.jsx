@@ -1,11 +1,11 @@
-import React from 'react'
-import Showcase from "../components/Showcase.jsx"
-import Content from "../components/Content.jsx"
-import Destinations from "../components/Destinations.jsx"
-import Tours from "../components/Tours.jsx"
-import Offers from "../components/Offers.jsx"
-import Discounts from "../components/Discounts.jsx"
-import Footer from "../components/Footer.jsx"
+import React from 'react';
+import Showcase from '../components/Showcase.jsx';
+import Content from '../components/Content.jsx';
+import Destinations from '../components/Destinations.jsx';
+import Tours from '../components/Tours.jsx';
+import Offers from '../components/Offers.jsx';
+import Discounts from '../components/Discounts.jsx';
+import Footer from '../components/Footer.jsx';
 
 const Home = () => {
 	return (
@@ -18,7 +18,7 @@ const Home = () => {
 			<Tours />
 			<Footer />
 		</section>
-	)
-}
+	);
+};
 
-export default Home
+export default Home;

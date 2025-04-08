@@ -2,32 +2,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Lemon&display=swap');
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    content: '';
-    opacity: .6;
-    background: #000000;
-/*    transition-all: 2*/
-/*    background-color: rgba(0,0,0,0.9);*/
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	content: '';
+	opacity: 0.6;
+	background: #000000;
+	/*    transition-all: 2*/
+	/*    background-color: rgba(0,0,0,0.9);*/
 }
 
 .hero-wrap {
-    width: 100%;
-    height: 100%;
-    position: inherit;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed;
+	width: 100%;
+	height: 100%;
+	position: inherit;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
 }
 
 .attachment {
-    background-attachment: fixed;
+	background-attachment: fixed;
 }
