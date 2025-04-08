@@ -66,7 +66,6 @@ export const login = async (req, res, next) => {
 		}
 
 		const ifPasswordIsCorrect = await bcrypt.compare(password, user.password)
-		console.log('password correct', ifPasswordIsCorrect)
 		if (!ifPasswordIsCorrect) {
 			return res.status(400).json({ msg: '🚫 Invalid email or password.' })
 		}
@@ -77,6 +76,8 @@ export const login = async (req, res, next) => {
 
 		user.refreshTokens.push(refreshToken)
 		await user.save()
+		
+		// console.log(userData)
 		// Send refresh token to the front-end
 		res.cookie('refreshToken', refreshToken, {
 			path: '/',
@@ -85,7 +86,7 @@ export const login = async (req, res, next) => {
 			sameSite: 'Strict',
 			secure: process.env.NODE_ENV === 'production',
 		})
-		res.status(200).json({ accessToken, msg: 'Login successfull🥇' })
+		res.status(200).json({ accessToken, user })
 	} catch (error) {
 		console.log(error.message)
 		console.log(error)
@@ -178,15 +179,15 @@ export const refreshAccessToken = async (req, res, next) => {
 			}
 
 			// Check if user exists
-			const user = await User.findById(decoded.userId)
+			const user = await User.findById(decoded.userId).select('-password')
 			if (!user || !user.refreshTokens.includes(refreshToken)) {
 				return res.status(403).json({ msg: '🚫 User not found' })
 			}
 
 			// Generate new access token
-			const newAccessToken = createAccessToken(user._id)
+			const accessToken = createAccessToken(user._id)
 
-			res.status(200).json({ accessToken: newAccessToken })
+			res.status(200).json({ accessToken, user })
 		})
 	} catch (error) {
 		console.error(error)

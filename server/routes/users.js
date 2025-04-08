@@ -4,6 +4,6 @@ import express from 'express'
 const router = express.Router()
 
 router.get('/allUsers', allUsers)
-router.get('/logged-in', loggedInUser)
+router.get('/logged-in', authenticate, loggedInUser)
 
 export default router
