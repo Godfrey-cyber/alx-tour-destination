@@ -26,7 +26,7 @@ const Login = () => {
 	const handleSubmit = async (event) => {
 	    event.preventDefault()
 	    dispatch(loginStart())
-	    if (!email == "" || !password == "") {
+	    if (email && password) {
 			try {
 				const res = await axiosInstance.post("/auth/login-user", loginData)
 				if (res.status === 200 || res.statusText === 'OK') {
@@ -55,7 +55,7 @@ const Login = () => {
     }
 	return (
 		<div className="flex flex-col bg-white h-screen justify-center items-center w-full px-5 md:px-10 lg:px-20">
-			<div className="flex flex-col space-y-6 h-92 w-1/3">
+			<div className="flex flex-col space-y-6 h-full lg:h-92 w-full lg:w-1/3">
 				<div className="flex flex-col space-y-3">
 					<p className="text-lg font-bold text-amber-400">
 						Login and start booking

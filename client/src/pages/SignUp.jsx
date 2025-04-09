@@ -26,7 +26,7 @@ const SignUp = () => {
     const handleSubmit = async (event) => {
 	    event.preventDefault()
 	    dispatch(signUpStart())
-	    if (!email == "" || !password == "" || !firstName == "" || !lastName == "") {
+	    if (email && password && firstName && lastName) {
 			try {
 				const res = await axiosInstance.post("/auth/register-user", signUpData)
 				if (res.status === 201 || res.statusText === 'OK') {

@@ -1,50 +1,75 @@
 import React, { useState } from 'react';
 import { MdOutlineChevronLeft, MdOutlineChevronRight } from 'react-icons/md';
+import BookingModal from "./BookingModal.jsx"
 
 const SearchBar = ({ onSubmit }) => {
-	const [checkInDate, setCheckInDate] = useState('');
-	const [checkOutDate, setCheckOutDate] = useState('');
-	const [destination, setDestination] = useState('');
-	const [error, setError] = useState('');
-
-	const handleCheckInChange = event => {
-		setCheckInDate(event.target.value);
-		if (
-			checkOutDate &&
-			new Date(event.target.value) > new Date(checkOutDate)
-		) {
-			setCheckOutDate('');
-		}
+	const destinations = ["Paris", "Tokyo", "New York", "Cape Town", "Rio de Janeiro"];
+	const [isModalOpen, setIsModalOpen] = useState(false)
+	const [formData, setFormData] = useState({
+	    destination: "",
+	    startDate: "",
+	    endDate: "",
+	});
+	const [errors, setErrors] = useState({
+	    dateError: "",
+	});
+	const [message, setMessage] = useState("");
+	const { destination, startDate, endDate } = formData
+	const handleChange = (event) => {
+	    const { name, value } = event.target;
+	    setFormData((prev) => ({ ...prev, [name]: value }));
 	};
 
-	const handleCheckOutChange = event => {
-		if (new Date(event.target.value) < new Date(checkInDate)) {
-			setError('Checkout date must be after check-in date.');
-		} else {
-			setError('');
-			setCheckOutDate(event.target.value);
-		}
-	};
+	const handleModal = () => {
+		setIsModalOpen(prev => !prev)
+	}
 
-	const handleDestination = event => {
-		setDestination(event.target.value);
-	};
+  	const handleChildrenChange = (event) => {
+	    const count = parseInt(event.target.value);
+	    setFormData((prev) => ({
+		    ...prev,
+		    children: count,
+		    childrenAges: Array(count).fill(""),
+	    }));
+  	};
+  	const handleChildAgeChange = (index, value) => {
+	    const newAges = [...formData.childrenAges];
+	    newAges[index] = value;
+	    setFormData((prev) => ({ ...prev, childrenAges: newAges }));
+	}
+	const handleDateValidation = () => {
+	    let dateError = "";
 
-	const handleSubmit = event => {
-		event.preventDefault();
-		if (!checkInDate || !checkOutDate || !destination) {
-			setError('Both dates are required.');
-			return;
-		}
-		onSubmit({ checkInDate, checkOutDate, destination });
-	};
+	    const startDate = new Date(formData.startDate);
+	    const endDate = new Date(formData.endDate);
+	    const today = new Date();
 
-	const formData = { checkInDate, checkOutDate, destination };
-	console.log(formData);
+	    if (startDate <= today) {
+	      dateError = "Start date must be in the future.";
+	    } else if (endDate <= today) {
+	      dateError = "End date must be in the future.";
+	    } else if (startDate >= endDate) {
+	      dateError = "Start date must be before the end date.";
+	    }
+
+	    setErrors({ dateError });
+
+	    return dateError === "";
+    };
+    const handleSubmit = (event) => {
+	    event.preventDefault();
+	    if (handleDateValidation()) {
+	      setMessage("Booking successful!");
+	      // You can send this data to your backend here
+	      console.log("Booking Info:", formData);
+	    } else {
+	      setMessage("");
+	    }
+  	};
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className="grid grid-cols-1 lg:grid-cols-5  h-fit lg:min-h-28 bg-white shadow-lg shadow-gray-300 w-4/5 divide-gray-300 divide-y-1 lg:divide-x-1 mx-auto   absolute left-1/2 -bottom-80 lg:-bottom-14 transform -translate-x-1/2 z-50"
+			className="grid grid-cols-1 lg:grid-cols-5  h-fit lg:min-h-28 bg-white shadow-lg shadow-gray-300 w-4/5 divide-gray-300 divide-y-1 lg:divide-x-1 mx-auto absolute left-1/2 -bottom-80 lg:-bottom-14 transform -translate-x-1/2 z-50"
 		>
 			<div className="flex flex-col space-y-3 h-full p-4 justify-center">
 				<p className="text-sm font-semibold text-orange-600">
@@ -53,10 +78,10 @@ const SearchBar = ({ onSubmit }) => {
 				<span className="flex space-x-1 items-center">
 					<MdOutlineChevronLeft className="h-5 w-5 text-gray-500" />
 					<input
-						value={destination}
-						onChange={handleDestination}
+						value={formData.destination}
+						onChange={handleChange}
 						type="text"
-						name=""
+						name="destination"
 						id=""
 						className="border-none outline-none w-4/5 h-5"
 						placeholder="Search place"
@@ -70,10 +95,10 @@ const SearchBar = ({ onSubmit }) => {
 				<span className="flex space-x-1 items-center">
 					{/*<MdOutlineChevronLeft className="h-5 w-5 text-gray-500" />*/}
 					<input
-						value={checkInDate}
-						onChange={handleCheckInChange}
+						value={formData.startDate}
+						onChange={handleChange}
 						type="date"
-						name=""
+						name="startDate"
 						id=""
 						className="border-none outline-none w-4/5 h-5"
 						placeholder="Check In Date"
@@ -87,28 +112,27 @@ const SearchBar = ({ onSubmit }) => {
 				<span className="flex space-x-1 items-center">
 					{/*<MdOutlineChevronLeft className="h-5 w-5 text-gray-500" />*/}
 					<input
-						value={checkOutDate}
-						onChange={handleCheckOutChange}
+						value={formData.endDate}
+						onChange={handleChange}
 						type="date"
-						name=""
+						name="endDate"
 						id=""
 						className="border-none outline-none w-4/5 h-5"
 						placeholder="Checkout Date"
 					/>
 				</span>
 			</div>
-			<div className="flex flex-col space-y-3 h-full p-4 justify-center">
+			<div className="flex flex-col space-y-3 h-full p-4 justify-center relative">
 				<p className="text-sm font-semibold text-orange-600">
-					PRICE LIMIT
+					Guests - Rooms
 				</p>
-				<span className="flex space-x-1 items-center">
-					<MdOutlineChevronLeft className="h-5 w-5 text-gray-500" />
+				<span onClick={handleModal} className="flex space-x-1 items-center">
 					<input
 						type="text"
-						name=""
+						name="guests"
 						id=""
-						className="border-none outline-none w-4/5 h-5"
-						placeholder="Price"
+						className="border-none outline-none w-full h-5"
+						placeholder="Guests"
 					/>
 				</span>
 			</div>
@@ -118,6 +142,7 @@ const SearchBar = ({ onSubmit }) => {
 			>
 				SEARCH
 			</button>
+			{isModalOpen && <BookingModal handleSubmit={handleSubmit} formData={formData} handleDateValidation={handleDateValidation} />}
 		</form>
 	);
 };

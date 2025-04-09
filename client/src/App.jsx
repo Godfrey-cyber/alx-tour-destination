@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Routes, useLocation, Navigate } from 'react-router-dom';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,14 +9,10 @@ import SignUp from './pages/SignUp.jsx';
 import Home from './pages/Home.jsx';
 import LandingPage from './pages/LandingPage.jsx';
 import Booking from './pages/Booking.jsx';
-import { lazy, Suspense } from 'react';
+// import { lazy, Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccess } from './redux/authSlice.js';
 import { axiosInstance } from './utilities/utiles.js';
-
-// const Login = lazy(() => import("./pages/Login.jsx"));
-// const SignUp = lazy(() => import("./pages/SignUp.jsx"));
-// const Home = lazy(() => import("./pages/Home.jsx"));
 
 function App() {
 	const dispatch = useDispatch();
@@ -47,10 +41,12 @@ function App() {
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<LandingPage />} />
-					<Route path="/home" element={accessToken ? <Home /> : <Navigate to="/login" />} />
-					<Route path="/login" element={accessToken ? <Navigate to="/home" /> : <Login />} />
-					<Route path="/signup" element={accessToken ? <Navigate to="/home" /> : <SignUp />} />
-					<Route path="/booking" element={accessToken ? <Booking /> : <Navigate to="/login" />} />
+					<Route path="/home" element={<Home /> } />
+					{/*<Route path="/home" element={accessToken ? <Home /> : <Navigate to="/login" /> } />*/}
+					<Route path="/login" element={accessToken ? <Navigate to="/home" /> : <Login /> } />
+					<Route path="/signup" element={accessToken ? <Navigate to="/home" /> : <SignUp /> } />
+					<Route path="/booking" element={ <Booking /> } />
+					{/*<Route path="/booking" element={accessToken ? <Booking /> : <Navigate to="/login" /> } />*/}
 				</Routes>
 			</BrowserRouter>
 		</section>

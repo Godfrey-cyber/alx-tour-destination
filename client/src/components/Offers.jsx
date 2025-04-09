@@ -1,4 +1,5 @@
 import React from 'react';
+import BookingModal from './BookingModal.jsx'
 
 const Offers = () => {
 	return (
