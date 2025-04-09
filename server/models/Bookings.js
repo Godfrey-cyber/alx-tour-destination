@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 const bookingSchema = new mongoose.Schema({
-	user: {
+	host: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User',
 		required: true,
@@ -10,8 +10,8 @@ const bookingSchema = new mongoose.Schema({
 		ref: 'Destination',
 		required: true,
 	},
-	checkIn: Date,
-	checkOut: Date,
+	startDate: Date,
+	endDate: Date,
 	guests: Number,
 	children: Number,
 	childrenAges: [Number],
