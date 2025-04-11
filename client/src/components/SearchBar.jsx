@@ -1,20 +1,76 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { MdOutlineChevronLeft, MdOutlineChevronRight } from 'react-icons/md';
 import BookingModal from "./BookingModal.jsx"
+import LocationModal from "./LocationModal.jsx"
+import { axiosInstance } from "../utilities/utiles.js"
+import debounce from 'lodash.debounce'
 
 const SearchBar = ({ onSubmit }) => {
-	const destinations = ["Paris", "Tokyo", "New York", "Cape Town", "Rio de Janeiro"];
+	// const destinations = ["Paris", "Tokyo", "New York", "Cape Town", "Rio de Janeiro"];
+	// const [destinationsSearch, setDestinationsSearch] = useState([])
 	const [isModalOpen, setIsModalOpen] = useState(false)
+	const [openLocationModal, setOpenLocationModal] = useState(false)
+	const [showSuggestions, setShowSuggestions] = useState(false)
+	const [destinationId, setDestinationId] = useState('')
+
+	const [query, setQuery] = useState('')
+	const [results, setResults] = useState([])
+
 	const [formData, setFormData] = useState({
 	    destination: "",
 	    startDate: "",
 	    endDate: "",
 	});
+	const [loading, setLoading] = useState(false)
 	const [errors, setErrors] = useState({
 	    dateError: "",
 	});
 	const [message, setMessage] = useState("");
-	const { destination, startDate, endDate } = formData
+	const { destination, startDate, endDate } = formData;
+
+	// GET Destinations onSelectDestination
+	// useEffect(() => {
+	const fetchDestinations = async (search) => {
+		try {
+			setLoading(true)
+			const res = await axiosInstance.get(`/destinations/all-destinations?search=${search}`)
+			if(res.status === 200) {
+				setResults(res.data.destinations)
+				console.log("Searched Destinations", destination)
+			}
+		} catch (error) {
+			console.log('Failed to load destinations', error)
+		} finally {
+			setLoading(false)
+		}
+	}
+
+	const onSelectDestination = (destination) => {
+		console.log('Selected:', destination)
+		// Set this destination to form state or redirect, etc.
+	}
+
+	const debouncedSearch = useCallback(
+		debounce((searchTerm) => {
+			if (searchTerm.trim()) {
+				fetchDestinations(searchTerm)
+			} else {
+				setResults([])
+			}
+		}, 300),
+		[]
+	)
+	useEffect(() => {
+		debouncedSearch(query)
+	}, [query, debouncedSearch])
+
+	const handleSelect = (destination) => {
+		setQuery(destination.title)
+		setResults([])
+		onSelectDestination(destination) // send it up to parent component if needed
+		setDestinationId(destination._id)
+	}
+
 	const handleChange = (event) => {
 	    const { name, value } = event.target;
 	    setFormData((prev) => ({ ...prev, [name]: value }));
@@ -22,6 +78,10 @@ const SearchBar = ({ onSubmit }) => {
 
 	const handleModal = () => {
 		setIsModalOpen(prev => !prev)
+	}
+
+	const handleLocationModal = () => {
+		setOpenLocationModal(prev => !prev)
 	}
 
   	const handleChildrenChange = (event) => {
@@ -66,6 +126,14 @@ const SearchBar = ({ onSubmit }) => {
 	      setMessage("");
 	    }
   	};
+
+  	const handleSuggestionClick = (destination) => {
+		setFormData((prev) => ({ ...prev, destination: destination.name }))
+		setShowSuggestions(false)
+	}
+
+	const allData = { startDate, endDate, destination: destinationId }
+
 	return (
 		<form
 			onSubmit={handleSubmit}
@@ -78,14 +146,28 @@ const SearchBar = ({ onSubmit }) => {
 				<span className="flex space-x-1 items-center">
 					<MdOutlineChevronLeft className="h-5 w-5 text-gray-500" />
 					<input
-						value={formData.destination}
-						onChange={handleChange}
 						type="text"
-						name="destination"
-						id=""
+						value={query}
+						onChange={(e) => setQuery(e.target.value)}
+						placeholder="Search destinations..."
 						className="border-none outline-none w-4/5 h-5"
-						placeholder="Search place"
 					/>
+					<div className="w-full lg:w-4/5 rounded-md h-fit max-h-96 shadow-lg shadow-gray-300 absolute top-45 left-0 z-50 bg-white">
+						{loading && <div className="flex items-center justify-center w-full h-full text-sm mt-1">Searching...</div>}
+						{results.length > 0 && (
+							<ul className="border-none">
+								{results.map((dest) => (
+									<li
+										key={dest._id}
+										onClick={() => handleSelect(dest)}
+										className="tex-sm fonst-normal text-gray-600 px-6 py-2 hover:bg-gray-100 cursor-pointer"
+									>
+										{dest.title} — {dest.location.city}, {dest.location.country}
+									</li>
+								))}
+							</ul>
+						)}
+					</div>
 				</span>
 			</div>
 			<div className="flex flex-col space-y-3 h-full p-4 justify-center">
@@ -142,7 +224,8 @@ const SearchBar = ({ onSubmit }) => {
 			>
 				SEARCH
 			</button>
-			{isModalOpen && <BookingModal handleSubmit={handleSubmit} formData={formData} handleDateValidation={handleDateValidation} />}
+			{isModalOpen && <BookingModal handleSubmit={handleSubmit} formData={allData} handleDateValidation={handleDateValidation} />}
+			{/*{<LocationModal />}*/}
 		</form>
 	);
 };

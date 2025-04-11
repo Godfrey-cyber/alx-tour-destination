@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const destinations = ["Paris", "Tokyo", "New York", "Cape Town", "Rio de Janeiro"];
+const ages = ["1 year old", "2 years old", "3 years old", "4 years old", "5 years old", "6 years old", "7 years old", "8 years old", "9 years old"];
 
 const BookingForm = () => {
   const [formData, setFormData] = useState({

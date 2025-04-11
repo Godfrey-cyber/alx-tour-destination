@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import showcaseImage from '../assets/download.jpeg';
 import Header from './Hearder.jsx';
 import SearchBar from './SearchBar.jsx';
@@ -9,14 +9,19 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const Showcase = () => {
 	const [currentIndex, setCurrentIndex] = useState(0);
+	const intervalRef = useRef(null);
+
 	useEffect(() => {
-		const interval = setInterval(() => {
-			setCurrentIndex(
-				prevIndex => (prevIndex + 1) % showcaseContent.length
-			);
-		}, 3000);
-		return () => clearInterval(interval);
+		startAutoSlide();
+
+		return () => clearInterval(intervalRef.current); // Cleanup
 	}, []);
+
+	const startAutoSlide = () => {
+		intervalRef.current = setInterval(() => {
+			setCurrentIndex(prev => (prev + 1) % showcaseContent.length);
+		}, 3000);
+	};
 
 	const nextProduct = () => {
 		setCurrentIndex(prev => (prev + 1) % showcaseContent.length);
@@ -26,6 +31,11 @@ const Showcase = () => {
 		setCurrentIndex(
 			prev => (prev - 1 + showcaseContent.length) % showcaseContent.length
 		);
+	};
+
+	const resetTimer = () => {
+		clearInterval(intervalRef.current);
+		startAutoSlide();
 	};
 	return (
 		<div className="flex w-full h-screen flex flex-col relative">

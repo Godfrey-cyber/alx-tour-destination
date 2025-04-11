@@ -41,12 +41,12 @@ function App() {
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<LandingPage />} />
-					<Route path="/home" element={<Home /> } />
-					{/*<Route path="/home" element={accessToken ? <Home /> : <Navigate to="/login" /> } />*/}
+					{/*<Route path="/home" element={<Home /> } />*/}
+					<Route path="/home" element={accessToken ? <Home /> : <Navigate to="/login" /> } />
 					<Route path="/login" element={accessToken ? <Navigate to="/home" /> : <Login /> } />
 					<Route path="/signup" element={accessToken ? <Navigate to="/home" /> : <SignUp /> } />
-					<Route path="/booking" element={ <Booking /> } />
-					{/*<Route path="/booking" element={accessToken ? <Booking /> : <Navigate to="/login" /> } />*/}
+					{/*<Route path="/booking" element={ <Booking /> } />*/}
+					<Route path="/booking" element={accessToken ? <Booking /> : <Navigate to="/login" /> } />
 				</Routes>
 			</BrowserRouter>
 		</section>
