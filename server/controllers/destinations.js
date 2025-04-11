@@ -56,12 +56,30 @@ export const addDestination = async (req, res, next) => {
 }
 
 export const destinations = async (req, res, next) => {
+	const searchTerm = req.query.search
 	try {
-		const destinations = await Destination.find().populate('host', 'name email')
+		let results
+
+		if (searchTerm) {
+			const regex = new RegExp(searchTerm, 'i')
+			results = await Destination.find({
+				$or: [
+					{ title: regex },
+					{ description: regex },
+					{ category: regex },
+					{ 'location.city': regex },
+					{ 'location.country': regex },
+				],
+			})
+		} else {
+			results = await Destination.find()
+				.populate('host', 'name email')
+				.sort({ createdAt: -1 })
+		}
 		res.status(200).json({
 			success: true,
-			count: destinations.length,
-			data: destinations,
+			count: results.length,
+			destinations: results,
 		})
 	} catch (error) {
 		console.log(error)

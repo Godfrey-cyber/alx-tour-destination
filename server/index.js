@@ -9,6 +9,7 @@ import { connectDb } from './config/db.js'
 import userRoutes from './routes/users.js'
 import authRoutes from './routes/auth.js'
 import destinationRoutes from './routes/destinations.js'
+import bookingRoutes from './routes/bookings.js'
 
 dotenv.config()
 const app = express()
@@ -31,6 +32,7 @@ connectDb()
 app.use('/api/v1/users', userRoutes)
 app.use('/api/v1/auth', authRoutes)
 app.use('/api/v1/destinations', destinationRoutes)
+app.use('/api/v1/bookings', bookingRoutes)
 
 app.use(errorHandler)
 

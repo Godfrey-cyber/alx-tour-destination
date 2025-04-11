@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema(
 		role: {
 			type: String,
 			enum: ['traveler', 'host', 'admin'],
-			default: 'traveler',
+			default: 'host',
 		},
 		refreshTokens: [{ type: String }],
 		verified: { type: Boolean, default: false },

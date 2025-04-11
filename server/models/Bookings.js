@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+
 const bookingSchema = new mongoose.Schema({
 	host: {
 		type: mongoose.Schema.Types.ObjectId,
@@ -14,7 +15,7 @@ const bookingSchema = new mongoose.Schema({
 	endDate: Date,
 	guests: Number,
 	children: Number,
-	childrenAges: [Number],
+	childrenAges: [String],
 	totalPrice: Number,
 	paymentStatus: {
 		type: String,

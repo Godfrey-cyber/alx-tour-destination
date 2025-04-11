@@ -70,5 +70,10 @@ const destinationSchema = new mongoose.Schema({
 		default: Date.now,
 	},
 })
-
+destinationSchema.index({
+	title: 'text',
+	description: 'text',
+	'location.city': 'text',
+	'location.country': 'text',
+})
 export default mongoose.model('Destination', destinationSchema)
