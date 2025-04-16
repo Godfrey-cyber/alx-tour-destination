@@ -5,49 +5,74 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import axios from 'axios';
-import { signUpStart, signUpFailure, signUpSuccess } from '../redux/authSlice.js';
+import {
+	signUpStart,
+	signUpFailure,
+	signUpSuccess,
+} from '../redux/authSlice.js';
 import { axiosInstance } from '../utilities/utiles.js';
 
 const SignUp = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const [signUpData, setSignUpData] = useState({ email: "", password: "", firstName: "", lastName: "" })
-	const [toggle, setToggle] = useState(false)
-	const { email, password, firstName, lastName } = signUpData
+	const [signUpData, setSignUpData] = useState({
+		email: '',
+		password: '',
+		firstName: '',
+		lastName: '',
+	});
+	const [toggle, setToggle] = useState(false);
+	const { email, password, firstName, lastName } = signUpData;
 	const { user, loading, error, accessToken } = useSelector(
 		state => state.auth
 	);
 
-	console.log(user)
-	const onChange = (event) => {
-        setSignUpData(prev => ({...prev, [event.target.name]: event.target.value}))
-    }
-    console.log(signUpData)
-    const handleSubmit = async (event) => {
-	    event.preventDefault()
-	    dispatch(signUpStart())
-	    if (email && password && firstName && lastName) {
+	console.log(user);
+	const onChange = event => {
+		setSignUpData(prev => ({
+			...prev,
+			[event.target.name]: event.target.value,
+		}));
+	};
+	console.log(signUpData);
+	const handleSubmit = async event => {
+		event.preventDefault();
+		dispatch(signUpStart());
+		if (email && password && firstName && lastName) {
 			try {
-				const res = await axiosInstance.post("/auth/register-user", signUpData)
+				const res = await axiosInstance.post(
+					'/auth/register-user',
+					signUpData
+				);
 				if (res.status === 201 || res.statusText === 'OK') {
-					dispatch(signUpSuccess(res.data))
-					setSignUpData({email: "", password: "", firstName: "", lastName: ""})
-	       			navigate('/login')
-	       			// toast.success("Successfully Logged in🥇")
+					dispatch(signUpSuccess(res.data));
+					setSignUpData({
+						email: '',
+						password: '',
+						firstName: '',
+						lastName: '',
+					});
+					navigate('/login');
+					// toast.success("Successfully Logged in🥇")
 				}
-				console.log(res)
+				console.log(res);
 			} catch (err) {
 				if (err || !res.status === 200 || !res.statusText === 'OK') {
-					dispatch(signUpFailure(err?.response?.data.msg))
-					setSignUpData({email: "", password: "", firstName: "", lastName: ""})
+					dispatch(signUpFailure(err?.response?.data.msg));
+					setSignUpData({
+						email: '',
+						password: '',
+						firstName: '',
+						lastName: '',
+					});
 					// toast.error(err?.response?.data?.msg)
 				}
 			}
-	    } else {
+		} else {
 			// toast.error('Soory! • Cannot log you without credentials')
-			console.log("error", error)
+			console.log('error', error);
 		}
-	}
+	};
 	return (
 		<div className="flex flex-col bg-white h-screen justify-center items-center w-full px-5 md:px-10 lg:px-20">
 			<div className="flex flex-col space-y-6 h-92 w-1/3">

@@ -4,14 +4,14 @@ import Header from '../components/Hearder.jsx';
 import Content from '../components/Content.jsx';
 import About from '../components/About.jsx';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from "react-redux"
+import { useSelector } from 'react-redux';
 
 const LandingPage = () => {
 	const navigate = useNavigate();
 	const { user, loading, error, accessToken } = useSelector(
 		state => state.auth
 	);
-	console.log(user)
+	console.log(user);
 	return (
 		<div className="flex w-full h-screen flex flex-col relative">
 			<Header />

@@ -33,7 +33,7 @@ function App() {
 		refreshToken();
 	}, [dispatch, isAuthenticated]);
 
-	console.log(user)
+	console.log(user);
 
 	return (
 		<section className="min-h-screen font-['Montserrat'] scroll-smooth w-full overflow-x-hidden">
@@ -42,11 +42,31 @@ function App() {
 				<Routes>
 					<Route path="/" element={<LandingPage />} />
 					{/*<Route path="/home" element={<Home /> } />*/}
-					<Route path="/home" element={accessToken ? <Home /> : <Navigate to="/login" /> } />
-					<Route path="/login" element={accessToken ? <Navigate to="/home" /> : <Login /> } />
-					<Route path="/signup" element={accessToken ? <Navigate to="/home" /> : <SignUp /> } />
+					<Route
+						path="/home"
+						element={
+							accessToken ? <Home /> : <Navigate to="/login" />
+						}
+					/>
+					<Route
+						path="/login"
+						element={
+							accessToken ? <Navigate to="/home" /> : <Login />
+						}
+					/>
+					<Route
+						path="/signup"
+						element={
+							accessToken ? <Navigate to="/home" /> : <SignUp />
+						}
+					/>
 					{/*<Route path="/booking" element={ <Booking /> } />*/}
-					<Route path="/booking" element={accessToken ? <Booking /> : <Navigate to="/login" /> } />
+					<Route
+						path="/booking"
+						element={
+							accessToken ? <Booking /> : <Navigate to="/login" />
+						}
+					/>
 				</Routes>
 			</BrowserRouter>
 		</section>

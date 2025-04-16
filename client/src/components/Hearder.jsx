@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { FaBarsStaggered } from 'react-icons/fa6';
 import CartModal from './CartModal.jsx';
 import { useNavigate } from 'react-router-dom';
-import  { useSelector } from "react-redux"
-import { logout } from "../redux/authSlice.js"
+import { useSelector } from 'react-redux';
+import { logout } from '../redux/authSlice.js';
 import { axiosInstance } from '../utilities/utiles.js';
-import { useDispatch } from "react-redux"
+import { useDispatch } from 'react-redux';
 
 const Hearder = () => {
 	const navigate = useNavigate();
@@ -13,25 +13,23 @@ const Hearder = () => {
 	const openMenuBar = () => {
 		setIsModalOpen(true);
 	};
-	const dispatch = useDispatch()
-	const { accessToken } = useSelector(
-		state => state.auth
-	);
+	const dispatch = useDispatch();
+	const { accessToken } = useSelector(state => state.auth);
 
 	const logoutUser = async () => {
 		// dispatch(logoutStart())
 		try {
-			const res = await axiosInstance.post('/auth/logout')
+			const res = await axiosInstance.post('/auth/logout');
 			if (res.status === 200 || res.statusText === 'OK') {
-				dispatch(logout())
-				navigate('/')
+				dispatch(logout());
+				navigate('/');
 			}
 		} catch (err) {
 			if (err) {
-				console.log(err)
+				console.log(err);
 			}
 		}
-	}
+	};
 	return (
 		<div className="flex items-center justify-between w-full bg-transparent absolute px-5 md:px-10 lg:px-30 h-20 z-50">
 			<div
@@ -70,17 +68,21 @@ const Hearder = () => {
 				>
 					Hotel
 				</p>
-				{!accessToken ? <button
-					onClick={() => navigate('/login')}
-					className="text-sm font-normal text-white font-semibold hover:bg-orange-500 cursor-pointer transition-all delay-300 px-4 py-2 bg-amber-500 rounded-md"
-				>
-					Register
-				</button> : <button
-					onClick={() => logoutUser()}
-					className="text-sm font-normal text-white font-semibold hover:bg-orange-500 cursor-pointer transition-all delay-300 px-4 py-2 bg-amber-500 rounded-md"
-				>
-					Logout
-				</button>}
+				{!accessToken ? (
+					<button
+						onClick={() => navigate('/login')}
+						className="text-sm font-normal text-white font-semibold hover:bg-orange-500 cursor-pointer transition-all delay-300 px-4 py-2 bg-amber-500 rounded-md"
+					>
+						Register
+					</button>
+				) : (
+					<button
+						onClick={() => logoutUser()}
+						className="text-sm font-normal text-white font-semibold hover:bg-orange-500 cursor-pointer transition-all delay-300 px-4 py-2 bg-amber-500 rounded-md"
+					>
+						Logout
+					</button>
+				)}
 			</div>
 			<FaBarsStaggered
 				onClick={() => openMenuBar()}

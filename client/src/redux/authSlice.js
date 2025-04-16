@@ -18,19 +18,19 @@ const authSlice = createSlice({
 	reducers: {
 		loginStart: state => {
 			state.loading = true;
-			isAuthenticated: false
+			isAuthenticated: false;
 		},
 		loginSuccess: (state, action) => {
 			state.loading = false;
-			const { user, accessToken } = action.payload
+			const { user, accessToken } = action.payload;
 			state.user = user;
 			state.accessToken = accessToken;
-			isAuthenticated: true
+			isAuthenticated: true;
 		},
 		loginFailure: (state, action) => {
 			state.loading = false;
 			state.error = action.payload;
-			isAuthenticated: false
+			isAuthenticated: false;
 		},
 		signUpStart: state => {
 			state.loading = true;
@@ -52,10 +52,17 @@ const authSlice = createSlice({
 	},
 });
 
-export const { loginStart, loginSuccess, loginFailure, signUpStart, signUpSuccess, signUpFailure, logout } =
-	authSlice.actions;
-export const selectCurrentUser = (state) => state.auth.user
-export const selectAccessToken = (state) => state.auth.accessToken
-export const selectIsAunthenticated = (state) => state.auth.isAuthenticated
+export const {
+	loginStart,
+	loginSuccess,
+	loginFailure,
+	signUpStart,
+	signUpSuccess,
+	signUpFailure,
+	logout,
+} = authSlice.actions;
+export const selectCurrentUser = state => state.auth.user;
+export const selectAccessToken = state => state.auth.accessToken;
+export const selectIsAunthenticated = state => state.auth.isAuthenticated;
 
 export default authSlice.reducer;

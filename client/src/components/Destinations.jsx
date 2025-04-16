@@ -1,5 +1,6 @@
 import React from 'react';
 import { destinations } from '../utilities/utiles.js';
+import { axiosInstance } from "../utilities/utiles.js"
 
 const Destinations = () => {
 	return (

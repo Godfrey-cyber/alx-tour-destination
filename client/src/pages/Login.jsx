@@ -11,48 +11,54 @@ import { axiosInstance } from '../utilities/utiles.js';
 const Login = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const [loginData, setLoginData] = useState({ email: "", password: "" })
-	const [toggle, setToggle] = useState(false)
-	const { email, password } = loginData
+	const [loginData, setLoginData] = useState({ email: '', password: '' });
+	const [toggle, setToggle] = useState(false);
+	const { email, password } = loginData;
 	const { user, loading, error, accessToken } = useSelector(
 		state => state.auth
 	);
 
-	console.log(user)
-	const onChange = (event) => {
-        setLoginData(prev => ({...prev, [event.target.name]: event.target.value}))
-    }
+	console.log(user);
+	const onChange = event => {
+		setLoginData(prev => ({
+			...prev,
+			[event.target.name]: event.target.value,
+		}));
+	};
 
-	const handleSubmit = async (event) => {
-	    event.preventDefault()
-	    dispatch(loginStart())
-	    if (email && password) {
+	const handleSubmit = async event => {
+		event.preventDefault();
+		dispatch(loginStart());
+		if (email && password) {
 			try {
-				const res = await axiosInstance.post("/auth/login-user", loginData)
+				const res = await axiosInstance.post(
+					'/auth/login-user',
+					loginData
+				);
 				if (res.status === 200 || res.statusText === 'OK') {
-					dispatch(loginSuccess(res.data))
-					setLoginData({email: "", password: ""})
-	       			navigate('/home')
-	       			console.log(res)
-	       			// toast.success("Successfully Logged in🥇")
+					dispatch(loginSuccess(res.data));
+					setLoginData({ email: '', password: '' });
+					navigate('/home');
+					console.log(res);
+					// toast.success("Successfully Logged in🥇")
 				}
 			} catch (err) {
 				if (err || !res.status === 200 || !res.statusText === 'OK') {
-					dispatch(loginFailure(err?.response?.data.msg))
-					setLoginData({email: "", password: ""})
+					dispatch(loginFailure(err?.response?.data.msg));
+					setLoginData({ email: '', password: '' });
 					// toast.error(err?.response?.data?.msg)
-					console.log(err)
+					console.log(err);
 				}
 			}
-	    } else {
+		} else {
 			// toast.error('Soory! • Cannot log you without credentials')
-			console.log("error", error)
+			console.log('error', error);
 		}
-	}
+	};
 
 	const togglePassword = () => {
-    	setToggle(prev => !prev)
-    }
+		setToggle(prev => !prev);
+	};
 	return (
 		<div className="flex flex-col bg-white h-screen justify-center items-center w-full px-5 md:px-10 lg:px-20">
 			<div className="flex flex-col space-y-6 h-full lg:h-92 w-full lg:w-1/3">

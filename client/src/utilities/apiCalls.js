@@ -14,5 +14,3 @@ export const loginUser = (email, password) => async dispatch => {
 		dispatch(loginFailure(error.response.data.msg || error.message));
 	}
 };
-
-
