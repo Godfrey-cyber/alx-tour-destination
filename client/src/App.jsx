@@ -9,6 +9,7 @@ import SignUp from './pages/SignUp.jsx';
 import Home from './pages/Home.jsx';
 import LandingPage from './pages/LandingPage.jsx';
 import Booking from './pages/Booking.jsx';
+import Destination from './pages/Destination.jsx';
 // import { lazy, Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccess } from './redux/authSlice.js';
@@ -41,6 +42,7 @@ function App() {
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<LandingPage />} />
+					<Route path="/destination" element={<Destination />} />
 					{/*<Route path="/home" element={<Home /> } />*/}
 					<Route
 						path="/home"
