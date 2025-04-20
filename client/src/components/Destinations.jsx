@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom"
 import { axiosInstance } from "../utilities/utiles.js"
 
 const Destinations = () => {
-	const [destination, setDestination] = useState([])
+	const [destinations, setDestinations] = useState([])
+	const navigate = useNavigate()
 	useEffect(() => {
 		const controller = new AbortController();
 		const getdestinations = async () => {
@@ -11,9 +13,7 @@ const Destinations = () => {
 					signal: controller.signal,
 				})
 				if (res.status === 200) {
-					setDestination(res.data.destinations)
-					console.log(destination)
-					console.log(res.data.destinations)
+					setDestinations(res.data.destinations)
 				}
 			} catch (error) {
 				if (error.name === "CanceledError") {
@@ -37,9 +37,10 @@ const Destinations = () => {
 				</p>
 			</span>
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-6 w-full">
-				{destination.slice(0, 4).map(data => (
+				{destinations.slice(0, 4).map(data => (
 					<div
 						key={data._id}
+						onClick={() => navigate(`/destination/${data._id}/${data.title}`)}
 						className="relative group flex flex-col space-y-4 h-36 bg-red-100 h-72 p-4 justify-center"
 					>
 						<p className="absolute left-1/2 bg-orange-500 px-6 py-2 top-0 transform -translate-x-1/2 z-50 text-sm z-50 font-bold text-white">

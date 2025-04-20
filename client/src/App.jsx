@@ -42,7 +42,7 @@ function App() {
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<LandingPage />} />
-					<Route path="/destination" element={<Destination />} />
+					<Route path="/destination/:id/:name" element={<Destination />} />
 					{/*<Route path="/home" element={<Home /> } />*/}
 					<Route
 						path="/home"
