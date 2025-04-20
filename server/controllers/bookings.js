@@ -5,7 +5,18 @@ export const addBooking = async (req, res, next) => {
 	try {
 		const { destination, adults, children, childrenAges, startDate, endDate, rooms, paymentStatus, totalPrice } =
 			req.body
-		const booking = new Booking({ host: req.userId, destination, adults, children, childrenAges, startDate, endDate, rooms, paymentStatus, totalPrice })
+		const booking = new Booking({
+			host: req.userId,
+			destination,
+			adults,
+			children,
+			childrenAges,
+			startDate,
+			endDate,
+			rooms,
+			paymentStatus,
+			totalPrice,
+		})
 		const newBooking = await booking.save()
 		res.status(201).json(newBooking)
 	} catch (error) {

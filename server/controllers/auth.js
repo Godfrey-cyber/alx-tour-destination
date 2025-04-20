@@ -193,3 +193,195 @@ export const refreshAccessToken = async (req, res, next) => {
 		next(error)
 	}
 }
+
+// test code
+
+// import { Customer } from '../models/Customer.js';
+// import {
+//   GenerateOtp,
+//   GeneratePassword,
+//   GenerateSalt,
+//   GenerateSignature,
+//   onRequestOTP
+// } from '../utility/index.js';
+
+// // Helper to validate required fields
+// const validateRequired = (fields, body) => {
+//   const missing = fields.filter((field) => !body[field]);
+//   return missing.length ? `Missing fields: ${missing.join(', ')}` : null;
+// };
+
+// export const CustomerSignUp = async (req, res, next) => {
+//   try {
+//     const { email, phone, password } = req.body;
+
+//     const missing = validateRequired(['email', 'phone', 'password'], req.body);
+//     if (missing) return res.status(400).json({ message: missing });
+
+//     const existingCustomer = await Customer.findOne({ email });
+//     if (existingCustomer) {
+//       return res.status(400).json({ message: 'Email already exists!' });
+//     }
+
+//     const salt = await GenerateSalt();
+//     const userPassword = await GeneratePassword(password, salt);
+//     const { otp, expiry } = GenerateOtp();
+
+//     const result = await Customer.create({
+//       email,
+//       password: userPassword,
+//       salt,
+//       phone,
+//       otp,
+//       otp_expiry: expiry,
+//       firstName: '',
+//       lastName: '',
+//       address: '',
+//       verified: false,
+//       lat: 0,
+//       lng: 0,
+//       orders: [],
+//     });
+
+//     if (result) {
+//       await onRequestOTP(otp, phone);
+//       const signature = await GenerateSignature({
+//         _id: result._id,
+//         email: result.email,
+//         verified: result.verified,
+//       });
+
+//       return res.status(201).json({
+//         signature,
+//         verified: result.verified,
+//         email: result.email,
+//       });
+//     }
+
+//     return res.status(400).json({ msg: 'Error while creating user' });
+//   } catch (error) {
+//     console.error('Signup Error:', error);
+//     return res.status(500).json({ msg: 'Internal server error' });
+//   }
+// };
+
+// export const CustomerLogin = async (req, res, next) => {
+//   try {
+//     const { email, password } = req.body;
+
+//     const missing = validateRequired(['email', 'password'], req.body);
+//     if (missing) return res.status(400).json({ message: missing });
+
+//     const customer = await Customer.findOne({ email });
+//     if (!customer) {
+//       return res.status(404).json({ message: 'Invalid credentials!' });
+//     }
+
+//     const isValidPassword = await GeneratePassword(password, customer.salt);
+//     if (isValidPassword !== customer.password) {
+//       return res.status(403).json({ message: 'Invalid password!' });
+//     }
+
+//     const signature = await GenerateSignature({
+//       _id: customer._id,
+//       email: customer.email,
+//       verified: customer.verified,
+//     });
+
+//     return res.status(200).json({
+//       signature,
+//       email: customer.email,
+//       verified: customer.verified,
+//     });
+//   } catch (error) {
+//     console.error('Login Error:', error);
+//     return res.status(500).json({ msg: 'Internal server error' });
+//   }
+// };
+
+// export const CustomerVerify = async (req, res, next) => {
+//   try {
+//     const customer = req.user; // assumed to be set by middleware
+//     const { otp } = req.body;
+
+//     if (!otp) return res.status(400).json({ message: 'OTP is required' });
+
+//     const profile = await Customer.findById(customer._id);
+//     if (!profile) return res.status(404).json({ message: 'User not found' });
+
+//     if (profile.otp === otp && profile.otp_expiry >= new Date()) {
+//       profile.verified = true;
+//       const updatedCustomer = await profile.save();
+
+//       const signature = await GenerateSignature({
+//         _id: updatedCustomer._id,
+//         email: updatedCustomer.email,
+//         verified: updatedCustomer.verified,
+//       });
+
+//       return res.status(200).json({
+//         signature,
+//         verified: updatedCustomer.verified,
+//         email: updatedCustomer.email,
+//       });
+//     }
+
+//     return res.status(400).json({ message: 'Invalid or expired OTP' });
+//   } catch (error) {
+//     console.error('Verify Error:', error);
+//     return res.status(500).json({ msg: 'Internal server error' });
+//   }
+// };
+
+// export const RequestOtp = async (req, res, next) => {
+//   try {
+//     const customer = req.user; // assumed to be set by middleware
+//     const profile = await Customer.findById(customer._id);
+//     if (!profile) return res.status(404).json({ message: 'User not found' });
+
+//     const { otp, expiry } = GenerateOtp();
+//     profile.otp = otp;
+//     profile.otp_expiry = expiry;
+//     await profile.save();
+
+//     await onRequestOTP(otp, profile.phone);
+
+//     return res.status(200).json({ message: 'OTP sent successfully!' });
+//   } catch (error) {
+//     console.error('Request OTP Error:', error);
+//     return res.status(500).json({ msg: 'Internal server error' });
+//   }
+// };
+
+// export const GetCustomerProfile = async (req, res, next) => {
+//   try {
+//     const customer = req.user;
+//     const profile = await Customer.findById(customer._id);
+//     if (!profile) return res.status(404).json({ message: 'User not found' });
+
+//     return res.status(200).json(profile);
+//   } catch (error) {
+//     console.error('Get Profile Error:', error);
+//     return res.status(500).json({ msg: 'Internal server error' });
+//   }
+// };
+
+// export const EditCustomerProfile = async (req, res, next) => {
+//   try {
+//     const customer = req.user;
+//     const { firstName, lastName, address } = req.body;
+
+//     const profile = await Customer.findById(customer._id);
+//     if (!profile) return res.status(404).json({ message: 'User not found' });
+
+//     if (firstName !== undefined) profile.firstName = firstName;
+//     if (lastName !== undefined) profile.lastName = lastName;
+//     if (address !== undefined) profile.address = address;
+
+//     const updatedProfile = await profile.save();
+//     return res.status(200).json(updatedProfile);
+//   } catch (error) {
+//     console.error('Edit Profile Error:', error);
+//     return res.status(500).json({ msg: 'Internal server error' });
+//   }
+// };

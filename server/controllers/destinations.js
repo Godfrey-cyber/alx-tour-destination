@@ -67,19 +67,35 @@ export const destinations = async (req, res, next) => {
 					{ title: regex },
 					{ description: regex },
 					{ category: regex },
+					{ amenities: regex },
 					{ 'location.city': regex },
 					{ 'location.country': regex },
 				],
 			})
 		} else {
-			results = await Destination.find()
-				.populate('host', 'name email')
-				.sort({ createdAt: -1 })
+			results = await Destination.find().populate('host', 'name email').sort({ createdAt: -1 })
 		}
 		res.status(200).json({
 			success: true,
 			count: results.length,
 			destinations: results,
+		})
+	} catch (error) {
+		console.log(error)
+		next()
+	}
+}
+
+export const destination = async (req, res, next) => {
+	try {
+		const { id } = req.params
+		const result = await Destination.findById(id).populate('host', 'name email')
+		if (!result) {
+			return res.status(404).json({ success: false, message: 'Sorry! No destination found.' })
+		}
+		res.status(200).json({
+			success: true,
+			result,
 		})
 	} catch (error) {
 		console.log(error)

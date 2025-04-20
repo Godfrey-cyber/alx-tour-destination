@@ -73,6 +73,8 @@ const destinationSchema = new mongoose.Schema({
 destinationSchema.index({
 	title: 'text',
 	description: 'text',
+	amenities: 'text',
+	category: 'text',
 	'location.city': 'text',
 	'location.country': 'text',
 })
