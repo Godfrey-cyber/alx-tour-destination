@@ -6,6 +6,7 @@ import Tours from '../components/Tours.jsx';
 import Offers from '../components/Offers.jsx';
 import Discounts from '../components/Discounts.jsx';
 import Footer from '../components/Footer.jsx';
+import DestinationImage from '../components/DestinationImage.jsx';
 
 const Home = () => {
 	return (
@@ -16,6 +17,7 @@ const Home = () => {
 			<Destinations />
 			<Discounts />
 			<Tours />
+			{/*<DestinationImage />*/}
 			<Footer />
 		</section>
 	);

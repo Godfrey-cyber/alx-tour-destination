@@ -40,7 +40,7 @@ const Destinations = () => {
 				{destinations.slice(0, 4).map(data => (
 					<div
 						key={data._id}
-						onClick={() => navigate(`/destination/${data._id}/${data.title}`)}
+						onClick={() => navigate(`/destination/${data._id}/${data.slug}`)}
 						className="relative group flex flex-col space-y-4 h-36 bg-red-100 h-72 p-4 justify-center"
 					>
 						<p className="absolute left-1/2 bg-orange-500 px-6 py-2 top-0 transform -translate-x-1/2 z-50 text-sm z-50 font-bold text-white">
@@ -51,7 +51,7 @@ const Destinations = () => {
 						</p>
 						<img
 							className="absolute top-0 left-0 bottom-0 h-full w-full object-cover"
-							src={data.images[0]}
+							src={data.images[1]}
 							alt=""
 						/>
 						<div className="overlay"></div>
