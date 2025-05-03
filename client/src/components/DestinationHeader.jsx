@@ -20,10 +20,10 @@ const DestinationHeader = () => {
 				<h3 className="text-white text-2xl font-bold">Pacific Travels</h3>
 				<div className="flex items-center space-x-5">
 					<NavItem icon={IoBedOutline} label="Stays" />
-		            <NavItem icon={PiAirplaneInFlightLight} label="Flights" />
-		            <NavItem icon={BsFillTaxiFrontFill} label="Car Rentals" />
-		            <NavItem icon={TbWindmill} label="Experiences" />
-		            <NavItem icon={MdAirportShuttle} label="Airport taxis" />
+          <NavItem icon={PiAirplaneInFlightLight} label="Flights" />
+          <NavItem icon={BsFillTaxiFrontFill} label="Car Rentals" />
+          <NavItem icon={TbWindmill} label="Experiences" />
+          <NavItem icon={MdAirportShuttle} label="Airport taxis" />
 				</div>
 			</div>
 			<div className="flex items-center space-x-3">
