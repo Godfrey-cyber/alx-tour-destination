@@ -85,6 +85,20 @@ export const destinations = async (req, res, next) => {
 		next()
 	}
 }
+// my destinations
+export const myDestinations = async (req, res, next) => {
+	try {
+		const destinations = await Destination.find({ host: req.userId }).populate('host', 'name email').sort({ createdAt: -1 })
+		res.status(200).json({
+			success: true,
+			count: destinations.length,
+			destinations,
+		})
+	} catch (error) {
+		console.log(error)
+		next()
+	}
+}
 
 export const destination = async (req, res, next) => {
 	try {

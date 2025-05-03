@@ -18,15 +18,11 @@ app.use(cookieParser())
 app.use(
 	cors({
 		// origin: process.env.CLIENT_URL,
-		origin: 'http://localhost:5173',
+		origin: 'https://alx-tour-destination.vercel.app',
 		credentials: true,
 	})
 )
 
-// mongoose.connect(process.env.MONGODB_URL)
-// mongoose.connection.on('disconnected', (error) => {
-//   console.log('❌ MongoDatabase disconnected❗', error)
-// })
 connectDb()
 
 app.use('/api/v1/users', userRoutes)

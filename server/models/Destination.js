@@ -36,7 +36,7 @@ const destinationSchema = new mongoose.Schema({
 	amenities: [String], // e.g. ['WiFi', 'Parking', 'Pool']
 	category: {
 		type: String,
-		enum: ['Beach', 'Mountain', 'City', 'Countryside', 'Desert', 'Historic', 'Luxury', 'Generic'],
+		enum: ['Beach', 'Eco', 'Mountain', 'City', 'Countryside', 'Desert', 'Historic', 'Luxury', 'Generic', 'Cultural'],
 		default: 'Generic',
 	},
 	host: {
