@@ -1,6 +1,7 @@
 import axios from 'axios';
 export const axiosInstance = axios.create({
-	baseURL: 'http://localhost:5000/api/v1', // api base url
+	baseURL: 'https://alx-tour-destination.onrender.com/api/v1', // api base url
+	https://alx-tour-destination.onrender.com
 	withCredentials: true, // Allows cookies (refresh token)
 });
 
