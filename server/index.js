@@ -15,11 +15,22 @@ dotenv.config()
 const app = express()
 app.use(express.json())
 app.use(cookieParser())
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://alx-tour-destination.vercel.app"
+]
 app.use(
 	cors({
-		// origin: process.env.CLIENT_URL,
-		origin: 'https://alx-tour-destination.vercel.app', 
-		credentials: true,
+		origin: function (origin, callback) {
+	      	// allow requests with no origin (like mobile apps, curl, Postman)
+	      	if (!origin) return callback(null, true)
+	      	if (allowedOrigins.includes(origin)) {
+	        	return callback(null, true)
+	      	} else {
+	        	return callback(new Error("CORS not allowed from this origin: " + origin))
+	      	}
+    	},
+    	credentials: true,
 	})
 )
 
