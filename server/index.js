@@ -18,7 +18,7 @@ app.use(cookieParser())
 app.use(
 	cors({
 		// origin: process.env.CLIENT_URL,
-		origin: 'https://alx-tour-destination.vercel.app',
+		origin: 'https://alx-tour-destination.vercel.app', 
 		credentials: true,
 	})
 )
