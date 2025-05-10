@@ -17,7 +17,7 @@ app.use(express.json())
 app.use(cookieParser())
 const allowedOrigins = [
   "https://alx-tour-destination.vercel.app", // https://alx-tour-destination.vercel.app
-  "http://localhost:5173"
+  // "http://localhost:5173"
 ]
 app.use(
 	cors({
