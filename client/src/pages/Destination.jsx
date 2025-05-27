@@ -86,7 +86,7 @@ const Destination = () => {
 			<NewDestination destination={destination} />
 			{/*<Amenities destination={destination} />*/}
 			<AboutProperty />
-			<GuestReview />
+			<GuestReviews />
 		</section>
 	)
 }
