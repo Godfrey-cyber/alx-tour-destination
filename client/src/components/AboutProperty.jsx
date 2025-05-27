@@ -15,8 +15,8 @@ const AboutProperty = () => {
 				<p className="text-sm font-normal text-gray-400">Distance in property description is calculated using © OpenStreetMap.</p>
 				<p className="text-xl font-bold text-gray-700 my-6 space-y-4">Most Facilities.</p>
 				<div className="flex space-x-3 items-center">
-					<FaBarsStaggered className="flex h-8 w-8 text-blue-400 cursor-pointer" />
-					<FaBarsStaggered className="flex h-8 w-8 text-blue-400 cursor-pointer" />
+					<FaWifi className="flex h-8 w-8 text-blue-400 cursor-pointer" />
+					<FaParking className="flex h-8 w-8 text-blue-400 cursor-pointer" />
 				</div>
 			</div>
 			<div className="col-span-4 border border-gray-200 rounded-md flex-col flex p-4 space-y-3">
