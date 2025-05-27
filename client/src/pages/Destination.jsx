@@ -8,6 +8,7 @@ import Amenities from "../components/Amenities.jsx"
 import DestinationHeader from "../components/DestinationHeader.jsx"
 import NewDestination from "../components/NewDestination.jsx"
 import AboutProperty from "../components/AboutProperty.jsx"
+import GuestReviews from "../components/GuestReviews.jsx"
 import { axiosInstance } from "../utilities/utiles.js"
 
 const TabItem = ({ label, active, onClick }) => (
@@ -85,6 +86,7 @@ const Destination = () => {
 			<NewDestination destination={destination} />
 			{/*<Amenities destination={destination} />*/}
 			<AboutProperty />
+			<GuestReview />
 		</section>
 	)
 }
