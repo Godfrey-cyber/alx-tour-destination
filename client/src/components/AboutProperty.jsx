@@ -3,8 +3,8 @@ import { FaBarsStaggered } from 'react-icons/fa6';
 
 const AboutProperty = () => {
 	return (
-		<div className="grid grid-cols-2 w-full px-20 md:px-10 px-5">
-			<div className="col-span-8 flex-col flex">
+		<div className="grid grid-cols-2 w-full lg:px-20 md:px-10 px-5">
+			<div className="col-span-8 flex-col flex space-y-5">
 				<p className="text-xl font-bold text-gray-700 my-6 space-y-4">About this Property.</p>
 				<p className="text-sm font-normal text-gray-700"><span className="font-semibold">Spacious Accommodations:</span> Lantana Road Apartments- By Truestay in Nairobi offers spacious apartments with one bedroom and one bathroom. Each unit features a kitchenette, kitchen, air-conditioning, and garden views.</p>
 				<p className="text-sm font-normal text-gray-700"><span className="font-semibold">Modern Amenities:</span> Guests enjoy free WiFi, a TV, and free on-site private parking. The property ensures a comfortable and convenient stay with all essential amenities available.</p>
@@ -12,11 +12,11 @@ const AboutProperty = () => {
 				<p className="text-sm font-normal text-gray-400">Distance in property description is calculated using © OpenStreetMap.</p>
 				<p className="text-xl font-bold text-gray-700 my-6 space-y-4">Most Facilities.</p>
 				<div className="flex space-x-3 items-center">
-					<FaBarsStaggered className="flex lg:hidden h-8 w-8 text-white cursor-pointer" />
-					<FaBarsStaggered className="flex lg:hidden h-8 w-8 text-white cursor-pointer" />
+					<FaBarsStaggered className="flex lg:hidden h-8 w-8 text-blue-400 cursor-pointer" />
+					<FaBarsStaggered className="flex lg:hidden h-8 w-8 text-blue-400 cursor-pointer" />
 				</div>
 			</div>
-			<div className="col-span-2 border border-gray-200 rounded-md flex-col flex">
+			<div className="col-span-2 border border-gray-200 rounded-md flex-col flex p-4 space-y-3">
 				<p className="text-xl font-bold text-gray-800">Property Highlights</p>
 				<div className="flex space-x-3 items-center">
 					{/*<span className="icon"></span>*/}
