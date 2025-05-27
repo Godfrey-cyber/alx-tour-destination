@@ -5,10 +5,10 @@ const GuestReviews = () => {
 		<div className='w-full gap-4 lg:px-20 md:px-10 px-5'>
 			<p className="text-xl font-bold text-gray-700 my-6 space-y-4">Guest Reviews.</p>
 			<div className="flex items-center space-x-6">
-				<span className="h-4 w-4 bg-blue-500 rounded-tl-sm rounded-br-sm">
+				<span className="h-6 w-6 bg-blue-500 rounded-tl-sm rounded-br-sm">
 					<p className="text-sm text-white">8.4</p>
-					<p className="text-sm">Very Good 15 · Reviews <span className="hover:text-underline text-blue-400 font-normal text-sm">Read all Reviews</span></p>
 				</span>
+				<p className="text-sm">Very Good 15 · Reviews <span className="hover:text-underline text-blue-400 font-normal text-sm">Read all Reviews</span></p>
 			</div>
 			<div className="grid grid-cols gap-4">
 				<div className="col-span-4 flex flex-col p-4">
