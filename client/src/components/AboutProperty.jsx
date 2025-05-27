@@ -6,8 +6,8 @@ import { FaWifi, FaParking } from "react-icons/fa";
 
 const AboutProperty = () => {
 	return (
-		<div className="grid grid-cols-12 w-full lg:px-20 md:px-10 px-5">
-			<div className="col-span-8 flex-col flex space-y-5">
+		<div className="grid grid-cols-12 w-full gap-4 lg:px-20 md:px-10 px-5">
+			<div className="col-span-12 md:col-span-8 flex-col flex space-y-5">
 				<p className="text-xl font-bold text-gray-700 my-6 space-y-4">About this Property.</p>
 				<p className="text-sm font-normal text-gray-700"><span className="font-semibold">Spacious Accommodations:</span> Lantana Road Apartments- By Truestay in Nairobi offers spacious apartments with one bedroom and one bathroom. Each unit features a kitchenette, kitchen, air-conditioning, and garden views.</p>
 				<p className="text-sm font-normal text-gray-700"><span className="font-semibold">Modern Amenities:</span> Guests enjoy free WiFi, a TV, and free on-site private parking. The property ensures a comfortable and convenient stay with all essential amenities available.</p>
@@ -19,7 +19,7 @@ const AboutProperty = () => {
 					<FaParking className="flex h-8 w-8 text-blue-400 cursor-pointer" />
 				</div>
 			</div>
-			<div className="col-span-4 border border-gray-200 rounded-md flex-col flex p-4 space-y-3">
+			<div className="col-span-12 md:col-span-4 border border-gray-200 rounded-md flex-col flex p-4 space-y-3">
 				<p className="text-xl font-bold text-gray-800">Property Highlights</p>
 				<div className="flex space-x-3 items-center">
 					{/*<span className="icon"></span>*/}
