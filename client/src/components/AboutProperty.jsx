@@ -16,11 +16,11 @@ const AboutProperty = () => {
 					<FaBarsStaggered className="flex lg:hidden h-8 w-8 text-blue-400 cursor-pointer" />
 				</div>
 			</div>
-			<div className="col-span-2 border border-gray-200 rounded-md flex-col flex p-4 space-y-3">
+			<div className="col-span-4 border border-gray-200 rounded-md flex-col flex p-4 space-y-3">
 				<p className="text-xl font-bold text-gray-800">Property Highlights</p>
 				<div className="flex space-x-3 items-center">
 					{/*<span className="icon"></span>*/}
-					<FaBarsStaggered className="flex lg:hidden h-8 w-8 text-white cursor-pointer" />
+					<FaBarsStaggered className="flex h-8 w-8 text-white cursor-pointer" />
 					<span className="icon">
 						<p className="text-sm font-semibold text-gray-700">The entire place is yours</p>
 						<p className="text-xs font-normal text-gray-500">1 bedroom, Bed, 1 bathroom, 600 m²</p>
@@ -28,7 +28,7 @@ const AboutProperty = () => {
 				</div>
 				<div className="flex space-x-3 items-center">
 					{/*<span className="icon"></span>*/}
-					<FaBarsStaggered className="flex lg:hidden h-8 w-8 text-white cursor-pointer" />
+					<FaBarsStaggered className="flex h-8 w-8 text-white cursor-pointer" />
 					<span className="icon">
 						<p className="text-sm font-semibold text-gray-700">Parking</p>
 						<p className="text-xs font-normal text-gray-500">Free parking, Private parking, On-site parking</p>
@@ -36,7 +36,7 @@ const AboutProperty = () => {
 				</div>
 				<div className="flex space-x-3 items-center">
 					{/*<span className="icon"></span>*/}
-					<FaBarsStaggered className="flex lg:hidden h-8 w-8 text-white cursor-pointer" />
+					<FaBarsStaggered className="flex h-8 w-8 text-white cursor-pointer" />
 					<span className="icon">
 						<p className="text-sm font-semibold text-gray-700">Free Wifi</p>
 						<p className="text-xs font-normal text-gray-500">Internet</p>
@@ -44,7 +44,7 @@ const AboutProperty = () => {
 				</div>
 				<div className="flex space-x-3 items-center">
 					{/*<span className="icon"></span>*/}
-					<FaBarsStaggered className="flex lg:hidden h-8 w-8 text-white cursor-pointer" />
+					<FaBarsStaggered className="flex h-8 w-8 text-white cursor-pointer" />
 					<span className="icon">
 						<p className="text-sm font-semibold text-gray-700">Views</p>
 						<p className="text-xs font-normal text-gray-500">Garden View</p>
@@ -52,7 +52,7 @@ const AboutProperty = () => {
 				</div>
 				<div className="flex space-x-3 items-center">
 					{/*<span className="icon"></span>*/}
-					<FaBarsStaggered className="flex lg:hidden h-8 w-8 text-white cursor-pointer" />
+					<FaBarsStaggered className="flex h-8 w-8 text-white cursor-pointer" />
 					<span className="icon">
 						<p className="text-sm font-semibold text-gray-700">Kitchen Facilities</p>
 						<p className="text-xs font-normal text-gray-500">Kitchenette, Kitchen</p>
