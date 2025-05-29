@@ -6,7 +6,7 @@ const countyData = {
   Mombasa: ["Ukundani", "Malaka", "Classic", "High Point", "Carefour"],
 };
 
-const RegistrationForm = () => {
+const CountyData = () => {
   const [selectedCounty, setSelectedCounty] = useState("");
   const [subcounties, setSubcounties] = useState([]);
   const [selectedSubcounty, setSelectedSubcounty] = useState("");
@@ -62,4 +62,4 @@ const RegistrationForm = () => {
   );
 };
 
-export default RegistrationForm;
+export default CountyData;
