@@ -9,7 +9,7 @@ import DestinationHeader from "../components/DestinationHeader.jsx"
 import NewDestination from "../components/NewDestination.jsx"
 import AboutProperty from "../components/AboutProperty.jsx"
 import GuestReviews from "../components/GuestReviews.jsx"
-import Countydata from "../components/Countydata.jsx"
+import CountyData from "../components/CountyData.jsx"
 import { axiosInstance } from "../utilities/utiles.js"
 
 const TabItem = ({ label, active, onClick }) => (
@@ -88,7 +88,7 @@ const Destination = () => {
 			{/*<Amenities destination={destination} />*/}
 			<AboutProperty />
 			<GuestReviews />
-			<Countydata />
+			<CountyData />
 		</section>
 	)
 }

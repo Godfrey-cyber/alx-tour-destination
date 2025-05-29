@@ -6,6 +6,8 @@ const countyData = {
   Mombasa: ["Ukundani", "Malaka", "Classic", "High Point", "Carefour"],
 };
 
+console.log(countyData)
+
 const CountyData = () => {
   const [selectedCounty, setSelectedCounty] = useState("");
   const [subcounties, setSubcounties] = useState([]);
