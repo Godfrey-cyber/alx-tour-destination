@@ -53,7 +53,7 @@ const LocationModal = ({ formData, handleDateValidation }) => {
 	const handleSelect = destination => {
 		setQuery(destination.title);
 		setResults([]);
-		onSelectDestination(destination); // send it up to parent component if needed
+		onSelectDestination(destination);
 	};
 
 	const handleModal = () => {
