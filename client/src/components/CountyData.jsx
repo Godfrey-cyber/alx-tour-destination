@@ -19,7 +19,7 @@ const CountyData = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-2xl shadow-md h-auto">
+    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-2xl shadow-md h-72">
       <h2 className="text-2xl font-bold mb-6">User Registration</h2>
 
       <form className="space-y-4">
