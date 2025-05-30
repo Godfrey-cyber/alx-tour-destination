@@ -16,7 +16,7 @@ const app = express()
 app.use(express.json())
 app.use(cookieParser())
 const allowedOrigins = [
-  "https://alx-tour-destination.vercel.app", // https://alx-tour-destination.vercel.app
+  "https://alx-tour-destination.vercel.app", 
   "http://localhost:5173"
 ]
 app.use(
@@ -27,7 +27,7 @@ app.use(
 	      	if (allowedOrigins.includes(origin)) {
 	        	return callback(null, true)
 	      	} else {
-	        	return callback(new Error("CORS not allowed from this origin: " + origin))
+	        	return callback(new Error("CORS not allowed from this origin ->: " + origin))
 	      	}
     	},
     	credentials: true,
