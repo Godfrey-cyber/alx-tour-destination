@@ -46,5 +46,5 @@ app.use(errorHandler)
 const PORT = process.env.PORT || process.env.npm_package_config_port
 
 app.listen(PORT, () => {
-	console.log(`Success 💯! Servers running on port: ${PORT} 👍`)
+	console.log(`Success 💯! Servers running on port: ${PORT} 👍👍`)
 })
