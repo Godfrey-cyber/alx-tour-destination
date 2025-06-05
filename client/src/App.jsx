@@ -10,6 +10,7 @@ import Home from './pages/Home.jsx';
 import LandingPage from './pages/LandingPage.jsx';
 import Booking from './pages/Booking.jsx';
 import Destination from './pages/Destination.jsx';
+import AddDestination from './pages/AddDestination.jsx';
 // import { lazy, Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccess } from './redux/authSlice.js';
@@ -41,7 +42,7 @@ function App() {
 			<ToastContainer />
 			<BrowserRouter>
 				<Routes>
-					<Route path="/" element={<LandingPage />} />
+					<Route path="/" element={!accessToken && <LandingPage />} />
 					<Route path="/destination/:id/:name" element={<Destination />} />
 					{/*<Route path="/home" element={<Home /> } />*/}
 					<Route
@@ -63,6 +64,7 @@ function App() {
 						}
 					/>
 					{/*<Route path="/booking" element={ <Booking /> } />*/}
+					<Route path="/add_destination" element={ accessToken ? <AddDestination /> : <Login /> } />
 					<Route
 						path="/booking"
 						element={
