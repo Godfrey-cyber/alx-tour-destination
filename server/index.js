@@ -10,6 +10,7 @@ import userRoutes from './routes/users.js'
 import authRoutes from './routes/auth.js'
 import destinationRoutes from './routes/destinations.js'
 import bookingRoutes from './routes/bookings.js'
+import reviewRoutes from './routes/reviews.js'
 
 dotenv.config()
 const app = express()
@@ -40,6 +41,7 @@ app.use('/api/v1/users', userRoutes)
 app.use('/api/v1/auth', authRoutes)
 app.use('/api/v1/destinations', destinationRoutes)
 app.use('/api/v1/bookings', bookingRoutes)
+app.use('/api/v1/reviews', reviewRoutes)
 
 app.use(errorHandler)
 
