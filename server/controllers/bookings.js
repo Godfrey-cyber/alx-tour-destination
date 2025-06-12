@@ -1,23 +1,44 @@
 import Booking from '../models/Bookings.js'
+import Counter from "../models/Counter.js"
 
+
+function generatePin(length = 4) {
+  const min = Math.pow(10, length - 1);
+  const max = Math.pow(10, length) - 1;
+  return Math.floor(Math.random() * (max - min + 1) + min).toString();
+}
 //POST - add a new booking
 export const addBooking = async (req, res, next) => {
 	try {
 		const { destination, adults, children, childrenAges, startDate, endDate, rooms, paymentStatus, totalPrice } =
 			req.body
-		if (
-	      !destination ||
-	      adults == null ||
-	      children == null ||
-	      !Array.isArray(childrenAges) ||
-	      !startDate ||
-	      !endDate ||
-	      rooms == null ||
-	      !paymentStatus ||
-	      totalPrice == null
-	    ) {
-	      return res.status(400).json({ msg: "❌ Please provide all required booking fields." });
-	    }
+		// if (
+	    //   !destination ||
+	    //   adults == null ||
+	    //   children == null ||
+	    //   !Array.isArray(childrenAges) ||
+	    //   !startDate ||
+	    //   !endDate ||
+	    //   rooms == null ||
+	    //   !paymentStatus ||
+	    //   totalPrice == null
+	    // ) {
+	    //   return res.status(400).json({ msg: "❌ Please provide all required booking fields." });
+	    // }
+	    const year = new Date().getFullYear();
+    	const counterId = `bookingNumber-${year}`;
+
+    	 // Atomically increment the counter for the current year
+	    const counter = await Counter.findByIdAndUpdate(
+	      { _id: counterId },
+	      { $inc: { seq: 1 } },
+	      { new: true, upsert: true }
+	    );
+
+	     // Format booking number: e.g., BK-2025-000123
+	    const bookingNumber = `BK-${year}-${counter.seq.toString().padStart(6, "0")}`;
+	    const pin = generatePin(4);
+
 		const booking = new Booking({
 			host: req.userId,
 			destination,
@@ -29,9 +50,12 @@ export const addBooking = async (req, res, next) => {
 			rooms,
 			paymentStatus,
 			totalPrice,
+			bookingNumber,
+      		pin,
 		})
 		const newBooking = await booking.save()
 		res.status(201).json(newBooking)
+		console.log(newBooking)
 	} catch (error) {
 		if (process.env.NODE_ENV === "development") {
 	      console.error(error);

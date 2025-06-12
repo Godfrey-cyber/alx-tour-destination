@@ -1,5 +1,6 @@
 // Add a destination
 import Destination from '../models/Destination.js'
+import Counter from '../models/Counter.js'
 import slugify from 'slugify'
 
 export const addDestination = async (req, res, next) => {
