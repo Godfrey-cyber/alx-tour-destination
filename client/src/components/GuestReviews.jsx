@@ -6,7 +6,7 @@ const GuestReviews = ({ reviews }) => {
 	console.log(items)
 	return (
 		<div className='w-full gap-4 lg:px-20 md:px-10 px-5'>
-			<p className="flex flex-coltext-xl font-bold text-gray-700 my-6 space-y-4">Guest Reviews.</p>
+			<p className="flex flex-col text-xl font-bold text-gray-700 my-6 space-y-4">Guest Reviews.</p>
 			<div className="flex items-center space-x-6 my-3">
 				<span className="flex items-center justify-center h-12 w-12 bg-blue-600 rounded-tl-sm rounded-br-sm">
 					<p className="text-sm text-white">8.4</p>

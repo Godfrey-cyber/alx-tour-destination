@@ -1,44 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom"
+import { useParams } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
 import { axiosInstance } from "../utilities/utiles.js"
 
-const Destinations = () => {
-	const [destinations, setDestinations] = useState([])
-	const navigate = useNavigate()
-	useEffect(() => {
-		const controller = new AbortController();
-		const getdestinations = async () => {
-			try {
-				const res = await axiosInstance.get("/destinations/all-destinations", {
-					signal: controller.signal,
-				})
-				if (res.status === 200) {
-					setDestinations(res.data.destinations)
-					console.log(destinations)
-				}
-			} catch (error) {
-				if (error.name === "CanceledError") {
-					console.log("Request canceled");
-				} else {
-					console.log("User not authenticated", error);
-				}
-			}
-		};
-		getdestinations();
-		return () => controller.abort();
-	}, []);         
+const DestByCity = () => {
+	const { cityName } = useParams()
+  	const [destinations, setDestinations] = useState([])
+
+  	useEffect(() => {
+	    const fetchDestinations = async () => {
+	      const { data } = await axiosInstance.get(`/destinations/city-destinations/${cityName}`)
+	      	setDestinations(data.cities)
+	      	console.log(destinations, data)
+	    }
+	    fetchDestinations()
+	}, [cityName])
 	return (
-		<div className="w-full min-h-screen lg:h-screen flex flex-col bg-pink-50 justify-center items-center px-5 md:px-10 lg:px-30">
-			<span className="flex flex-col items-center justify-center space-y-4 my-3 w-full">
-				<p className="text-lg font-semibold text-orange-600">
-					Welcome to Pacific
-				</p>
-				<p className="text-4xl text-black font-bold text-center">
-					Trending Destinations
-				</p>
-			</span>
-			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-6 w-full">
-				{!destinations ? "No Destinations" : destinations?.slice(0, 4).map(data => (
+		<div className="col-span-12 md:col-span-9 h-20 rounded-md p-3">
+			<div className="grid grid-cols-12 md:grid-cols-2 lg:grid-cols-3 gap-4">
+				{!destinations ? "No Destinations" : destinations?.map(data => (
 					<div
 						key={data._id}
 						onClick={() => navigate(`/destination/${data._id}/${data.slug}`)}
@@ -68,7 +47,7 @@ const Destinations = () => {
 				))}
 			</div>
 		</div>
-	);
-};
+	)
+}
 
-export default Destinations;
+export default DestByCity

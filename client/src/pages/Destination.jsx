@@ -10,6 +10,7 @@ import NewDestination from "../components/NewDestination.jsx"
 import AboutProperty from "../components/AboutProperty.jsx"
 import GuestReviews from "../components/GuestReviews.jsx"
 import CountyData from "../components/CountyData.jsx"
+import HouseRules from "../components/HouseRules.jsx"
 import { axiosInstance } from "../utilities/utiles.js"
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -23,9 +24,11 @@ const Destination = () => {
 	const [activeTab, setActiveTab] = useState("Overview"); 
 	const [destination, setDestination] = useState([])
 	const [reviews, setReviews] = useState([])
-	const { id } = useParams()
+	const { id, name } = useParams()
 	const { accessToken } = useSelector(state => state.auth);
-
+	console.log(name, id)
+	const path = useParams()
+	console.log(path)
 	useEffect(() => {
 		const controller = new AbortController();
 		const getdestinations = async () => {
@@ -136,6 +139,7 @@ const Destination = () => {
 			{/*<Amenities destination={destination} />*/}
 			<AboutProperty />
 			<GuestReviews reviews={reviews} />
+			<HouseRules />
 			<CountyData />
 		</section>
 	)

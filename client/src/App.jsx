@@ -11,6 +11,7 @@ import LandingPage from './pages/LandingPage.jsx';
 import Booking from './pages/Booking.jsx';
 import Destination from './pages/Destination.jsx';
 import AddDestination from './pages/AddDestination.jsx';
+import CityDestination from './pages/CityDestinations.jsx';
 // import { lazy, Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccess } from './redux/authSlice.js';
@@ -65,6 +66,7 @@ function App() {
 					/>
 					{/*<Route path="/booking" element={ <Booking /> } />*/}
 					<Route path="/add_destination" element={ accessToken ? <AddDestination /> : <Login /> } />
+					<Route path="/destinations/city/:cityName" element={<CityDestination />} />
 					<Route
 						path="/booking"
 						element={
