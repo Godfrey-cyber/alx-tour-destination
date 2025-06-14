@@ -10,7 +10,9 @@ import NewDestination from "../components/NewDestination.jsx"
 import AboutProperty from "../components/AboutProperty.jsx"
 import GuestReviews from "../components/GuestReviews.jsx"
 import CountyData from "../components/CountyData.jsx"
+import HouseRules from "../components/HouseRules.jsx"
 import { axiosInstance } from "../utilities/utiles.js"
+import { useDispatch, useSelector } from 'react-redux';
 
 const TabItem = ({ label, active, onClick }) => (
   <span onClick={onClick} className={`flex text-sm justify-center cursor-pointer hover:bg-gray-200 h-full transition-all delay-300 items-center ${active ? "border-b bg-gray-100 text-orange-600 font-semibold border-orange-600" : "text-sm font-normal text-gray-700"}`}>
@@ -19,32 +21,81 @@ const TabItem = ({ label, active, onClick }) => (
 );
 
 const Destination = () => {
-	const [activeTab, setActiveTab] = useState("Overview");
+	const [activeTab, setActiveTab] = useState("Overview"); 
 	const [destination, setDestination] = useState([])
-	const { id } = useParams()
+	const [reviews, setReviews] = useState([])
+	const { id, name } = useParams()
+	const { accessToken } = useSelector(state => state.auth);
+	console.log(name, id)
+	const path = useParams()
+	console.log(path)
 	useEffect(() => {
 		const controller = new AbortController();
 		const getdestinations = async () => {
 			try {
 				const res = await axiosInstance.get(`/destinations/destination/${id}`, {
 					signal: controller.signal,
+					headers: {
+				    Authorization: `Bearer ${accessToken}`,
+				  },
 				})
 				if (res.status === 200) {
 					setDestination(res.data.result)
-					console.log(res.data.result)
-					console.log(destination)
+					console.log("Fetched destination:", res.data.result);
 				}
 			} catch (error) {
-				if (error.name === "CanceledError") {
-					console.log("Request canceled");
-				} else {
-					console.log("User not authenticated", error);
-				}
-			}
+        if (error.code === "ERR_CANCELED") {
+          console.log("Request canceled");
+        } else if (error.response && error.response.status === 401) {
+          console.log("User not authenticated", error);
+        } else {
+          console.log("Error fetching destination:", error);
+        }
+      }
 		};
 		getdestinations();
 		return () => controller.abort();
-	}, [id]);
+	}, [id, accessToken]);
+
+	useEffect(() => {
+    if (destination) {
+      console.log("Destination updated:", destination);
+    }
+  }, [destination]);
+
+	useEffect(() => {
+		const controller = new AbortController();
+		const getReviews = async () => {
+			try {
+				const res = await axiosInstance.get(`/reviews/destination-reviews/${id}`, { ///68415770a8e0cc6cef30faa7
+					signal: controller.signal,
+					headers: {
+				    Authorization: `Bearer ${accessToken}`,
+				  },
+				})
+				if (res.status === 200) {
+					setReviews(res.data.reviews);
+				}
+			} catch (error) {
+        // Prefer error.code === "ERR_CANCELED" for Axios v1+
+        if (error.code === "ERR_CANCELED") {
+          console.log("Request canceled");
+        } else if (error.response && error.response.status === 401) {
+          console.log("User not authenticated", error);
+        } else {
+          console.log("Error fetching reviews:", error);
+        }
+      }
+		};
+		getReviews();
+    return () => controller.abort();
+	}, [id, accessToken, setReviews]);
+
+	useEffect(() => {
+    if (reviews) {
+      console.log("Reviews updated:", reviews);
+    }
+  }, [reviews]);
 
 	const tabs = [
     "Overview",
@@ -87,7 +138,8 @@ const Destination = () => {
 			<NewDestination destination={destination} />
 			{/*<Amenities destination={destination} />*/}
 			<AboutProperty />
-			<GuestReviews />
+			<GuestReviews reviews={reviews} />
+			<HouseRules />
 			<CountyData />
 		</section>
 	)

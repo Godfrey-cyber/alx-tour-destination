@@ -22,6 +22,8 @@ const bookingSchema = new mongoose.Schema({
 		enum: ['pending', 'paid', 'failed'],
 		default: 'pending',
 	},
+	bookingNumber: { type: String, required: true, unique: true },
+  	pin: { type: String, required: true },
 	createdAt: {
 		type: Date,
 		default: Date.now,
