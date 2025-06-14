@@ -247,6 +247,15 @@ export const editDestination = async (req, res, next) => {
 	}
 }
 
+// Distinct Destinations
+export const cityDestinations = async(req, res) => {
+	try {
+		const { cityName } = req.params
+		const cities = await Destination.find({'location.city': cityName})
+		res.status(200).json({ cities })
+	} catch (error) {
+    res.status(500).json({ message: 'Server Error' })
+  }
+}
 
-
-
+// 

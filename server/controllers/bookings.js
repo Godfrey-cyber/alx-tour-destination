@@ -12,19 +12,19 @@ export const addBooking = async (req, res, next) => {
 	try {
 		const { destination, adults, children, childrenAges, startDate, endDate, rooms, paymentStatus, totalPrice } =
 			req.body
-		// if (
-	    //   !destination ||
-	    //   adults == null ||
-	    //   children == null ||
-	    //   !Array.isArray(childrenAges) ||
-	    //   !startDate ||
-	    //   !endDate ||
-	    //   rooms == null ||
-	    //   !paymentStatus ||
-	    //   totalPrice == null
-	    // ) {
-	    //   return res.status(400).json({ msg: "❌ Please provide all required booking fields." });
-	    // }
+		if (
+	      !destination ||
+	      adults == null ||
+	      // children == null ||
+	      !Array.isArray(childrenAges) ||
+	      !startDate ||
+	      !endDate ||
+	      rooms == null ||
+	      // !paymentStatus ||
+	      totalPrice == null
+	    ) {
+	      return res.status(400).json({ msg: "❌ Please provide all required booking fields." });
+	    }
 	    const year = new Date().getFullYear();
     	const counterId = `bookingNumber-${year}`;
 
