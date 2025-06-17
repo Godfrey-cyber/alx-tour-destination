@@ -13,9 +13,9 @@
 	bottom: 0;
 	content: '';
 	opacity: 0.6;
-/*	background: #000000;*/
+	/*	background: #000000;*/
 	/*    transition-all: 2*/
-	    background-color: rgba(0,0,0,0.4);
+	background-color: rgba(0, 0, 0, 0.4);
 }
 
 .hero-wrap {

@@ -1,11 +1,11 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
-import DestinationHeader from "../components/DestinationHeader.jsx"
-import DestByCity from "../components/DestByCity.jsx"
-import CityFilter from "../components/CityFilter.jsx"
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import DestinationHeader from '../components/DestinationHeader.jsx';
+import DestByCity from '../components/DestByCity.jsx';
+import CityFilter from '../components/CityFilter.jsx';
 
 const CityDestinations = () => {
-	const { cityName } = useParams()
+	const { cityName } = useParams();
 	return (
 		<section className="flex font-normal flex-col h-full w-full bg-white">
 			<DestinationHeader />
@@ -14,7 +14,7 @@ const CityDestinations = () => {
 				<DestByCity />
 			</div>
 		</section>
-	)
-}
+	);
+};
 
-export default CityDestinations
+export default CityDestinations;

@@ -112,7 +112,7 @@ const AddDestination = () => {
 				</div>
 			</div>
 		</div>
-	)
-}
+	);
+};
 
-export default AddDestination
+export default AddDestination;

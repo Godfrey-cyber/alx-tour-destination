@@ -23,7 +23,7 @@ const bookingSchema = new mongoose.Schema({
 		default: 'pending',
 	},
 	bookingNumber: { type: String, required: true, unique: true },
-  	pin: { type: String, required: true },
+	pin: { type: String, required: true },
 	createdAt: {
 		type: Date,
 		default: Date.now,

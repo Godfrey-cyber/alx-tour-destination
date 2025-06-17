@@ -14,6 +14,7 @@ export const addDestination = async (req, res, next) => {
 			!description ||
 			!pricePerNight ||
 			!maxGuests ||
+			!images ||
 			!location ||
 			!location.country ||
 			!location.city
@@ -41,7 +42,7 @@ export const addDestination = async (req, res, next) => {
 			amenities,
 			category,
 			host: req.userId, // assuming req.userId is set by auth middleware
-			availableDates
+			availableDates,
 		})
 		await newDestination.save()
 		console.log(req.user)
@@ -56,131 +57,131 @@ export const addDestination = async (req, res, next) => {
 }
 
 export const destinations = async (req, res, next) => {
-  try {
-    // Destructure and set defaults for query parameters
-    const {
-      search,
-      page = 1,
-      limit = 10,
-      sortBy = "createdAt",
-      order = "desc",
-      minPrice,
-      maxPrice,
-      minRating,
-      maxRating,
-      amenities,
-    } = req.query;
+	try {
+		// Destructure and set defaults for query parameters
+		const {
+			search,
+			page = 1,
+			limit = 10,
+			sortBy = 'createdAt',
+			order = 'desc',
+			minPrice,
+			maxPrice,
+			minRating,
+			maxRating,
+			amenities,
+		} = req.query
 
-    const pipeline = [];
+		const pipeline = []
 
-    // Search filter
-    if (search) {
-      const regex = new RegExp(search, 'i');
-      pipeline.push({
-        $match: {
-          $or: [
-            { title: regex },
-            { description: regex },
-            { category: regex },
-            { amenities: regex },
-            { "location.city": regex },
-            { "location.country": regex },
-          ],
-        },
-      });
-    }
+		// Search filter
+		if (search) {
+			const regex = new RegExp(search, 'i')
+			pipeline.push({
+				$match: {
+					$or: [
+						{ title: regex },
+						{ description: regex },
+						{ category: regex },
+						{ amenities: regex },
+						{ 'location.city': regex },
+						{ 'location.country': regex },
+					],
+				},
+			})
+		}
 
-    // Price range filter
-    if (minPrice || maxPrice) {
-      pipeline.push({
-        $match: {
-          pricePerNight: {
-            ...(minPrice ? { $gte: Number(minPrice) } : {}),
-            ...(maxPrice ? { $lte: Number(maxPrice) } : {}),
-          },
-        },
-      });
-    }
+		// Price range filter
+		if (minPrice || maxPrice) {
+			pipeline.push({
+				$match: {
+					pricePerNight: {
+						...(minPrice ? { $gte: Number(minPrice) } : {}),
+						...(maxPrice ? { $lte: Number(maxPrice) } : {}),
+					},
+				},
+			})
+		}
 
-    // Rating range filter
-    if (minRating || maxRating) {
-      pipeline.push({
-        $match: {
-          averageRating: {
-            ...(minRating ? { $gte: Number(minRating) } : {}),
-            ...(maxRating ? { $lte: Number(maxRating) } : {}),
-          },
-        },
-      });
-    }
+		// Rating range filter
+		if (minRating || maxRating) {
+			pipeline.push({
+				$match: {
+					averageRating: {
+						...(minRating ? { $gte: Number(minRating) } : {}),
+						...(maxRating ? { $lte: Number(maxRating) } : {}),
+					},
+				},
+			})
+		}
 
-    // Amenities filter (at least one matches)
-    if (amenities) {
-      const amenitiesArray = amenities.split(',').map(item => item.trim());
-      pipeline.push({
-        $match: {
-          amenities: { $in: amenitiesArray },
-        },
-      });
-    }
+		// Amenities filter (at least one matches)
+		if (amenities) {
+			const amenitiesArray = amenities.split(',').map((item) => item.trim())
+			pipeline.push({
+				$match: {
+					amenities: { $in: amenitiesArray },
+				},
+			})
+		}
 
-    // Sorting
-    const sortOrder = order === "asc" ? 1 : -1;
-    pipeline.push({ $sort: { [sortBy]: sortOrder } });
+		// Sorting
+		const sortOrder = order === 'asc' ? 1 : -1
+		pipeline.push({ $sort: { [sortBy]: sortOrder } })
 
-    // Pagination
-    const skip = (parseInt(page) - 1) * parseInt(limit);
-    pipeline.push({ $skip: skip });
-    pipeline.push({ $limit: parseInt(limit) });
+		// Pagination
+		const skip = (parseInt(page) - 1) * parseInt(limit)
+		pipeline.push({ $skip: skip })
+		pipeline.push({ $limit: parseInt(limit) })
 
-    // Project only necessary fields
-    pipeline.push({
-      $project: {
-        title: 1,
-        description: 1,
-        category: 1,
-        amenities: 1,
-        location: 1,
-        pricePerNight: 1,
-        averageRating: 1,
-        host: 1,
-        createdAt: 1,
-        images: 1,
-        slug: 1,
-      },
-    });
+		// Project only necessary fields
+		pipeline.push({
+			$project: {
+				title: 1,
+				description: 1,
+				category: 1,
+				amenities: 1,
+				location: 1,
+				pricePerNight: 1,
+				averageRating: 1,
+				host: 1,
+				createdAt: 1,
+				images: 1,
+				slug: 1,
+			},
+		})
 
-    // Run aggregation
-    const destinations = await Destination.aggregate(pipeline);
+		// Run aggregation
+		const destinations = await Destination.aggregate(pipeline)
 
-    // For total count (remove skip/limit stages)
-    const countPipeline = pipeline.filter(
-      (stage) => !("$skip" in stage) && !("$limit" in stage)
-    );
-    countPipeline.push({ $count: "total" });
-    const countResult = await Destination.aggregate(countPipeline);
-    const total = countResult[0]?.total || 0;
+		// For total count (remove skip/limit stages)
+		const countPipeline = pipeline.filter((stage) => !('$skip' in stage) && !('$limit' in stage))
+		countPipeline.push({ $count: 'total' })
+		const countResult = await Destination.aggregate(countPipeline)
+		const total = countResult[0]?.total || 0
 
-    // Response
-    res.status(200).json({
-      success: true,
-      count: destinations.length,
-      total,
-      page: parseInt(page),
-      pages: Math.ceil(total / limit),
-      destinations,
-    });
-  } catch (error) {
-    if (process.env.NODE_ENV === "development") {
-      console.error(error);
-    }
-    next(error);
-  }
-};
+		// Response
+		res.status(200).json({
+			success: true,
+			count: destinations.length,
+			total,
+			page: parseInt(page),
+			pages: Math.ceil(total / limit),
+			destinations,
+		})
+	} catch (error) {
+		if (process.env.NODE_ENV === 'development') {
+			console.error(error)
+		}
+		next(error)
+	}
+}
 // my destinations
 export const myDestinations = async (req, res, next) => {
 	try {
-		const destinations = await Destination.find({ host: req.userId }).populate('host', 'firstName email').sort({ createdAt: -1 })
+		const destinations = await Destination.find({ host: req.userId })
+			.populate('host', 'firstName email')
+			.sort({ createdAt: -1 })
 		res.status(200).json({
 			success: true,
 			count: destinations.length,
@@ -248,14 +249,14 @@ export const editDestination = async (req, res, next) => {
 }
 
 // Distinct Destinations
-export const cityDestinations = async(req, res) => {
+export const cityDestinations = async (req, res) => {
 	try {
 		const { cityName } = req.params
-		const cities = await Destination.find({'location.city': cityName})
+		const cities = await Destination.find({ 'location.city': cityName })
 		res.status(200).json({ cities })
 	} catch (error) {
-    res.status(500).json({ message: 'Server Error' })
-  }
+		res.status(500).json({ message: 'Server Error' })
+	}
 }
 
-// 
+//
