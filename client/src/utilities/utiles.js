@@ -1,6 +1,6 @@
 import axios from 'axios';
 export const axiosInstance = axios.create({
-	// baseURL: 'https://alx-tour-destination.onrender.com/api/v1', 
+	// baseURL: 'https://alx-tour-destination.onrender.com/api/v1',
 	baseURL: 'http://localhost:5000/api/v1',
 	withCredentials: true, // Allows cookies (refresh token)
 });
@@ -59,33 +59,6 @@ export const showcaseContent2 = [
 		id: 4,
 		title: 'Private Guide',
 		large: 'A small river named Duden flows by their place and supplies it with the necessary',
-		image: 'https://images.pexels.com/photos/2166553/pexels-photo-2166553.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-	},
-];
-
-export const destinations = [
-	{
-		id: 1,
-		country: 'Greece',
-		tours: 7,
-		image: 'https://cdn.i-scmp.com/sites/default/files/styles/1020x680/public/d8/images/canvas/2024/09/10/f2aa48e4-3f30-49c2-bb14-c023b63b924a_9ea7c6b3.jpg?itok=51BmThU7&v=1725958424',
-	},
-	{
-		id: 2,
-		country: 'Philipines',
-		tours: 2,
-		image: 'https://images.pexels.com/photos/1544376/pexels-photo-1544376.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-	},
-	{
-		id: 3,
-		country: 'Kenya',
-		tours: 4,
-		image: 'https://images.pexels.com/photos/2253821/pexels-photo-2253821.jpeg',
-	},
-	{
-		id: 4,
-		country: 'Thailand',
-		tours: 10,
 		image: 'https://images.pexels.com/photos/2166553/pexels-photo-2166553.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
 	},
 ];

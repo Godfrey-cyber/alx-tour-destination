@@ -12,6 +12,7 @@ import Booking from './pages/Booking.jsx';
 import Destination from './pages/Destination.jsx';
 import AddDestination from './pages/AddDestination.jsx';
 import CityDestination from './pages/CityDestinations.jsx';
+import ListProperty from './pages/ListProperty.jsx';
 // import { lazy, Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccess } from './redux/authSlice.js';
@@ -44,7 +45,10 @@ function App() {
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={!accessToken && <LandingPage />} />
-					<Route path="/destination/:id/:name" element={<Destination />} />
+					<Route
+						path="/destination/:id/:name"
+						element={<Destination />}
+					/>
 					{/*<Route path="/home" element={<Home /> } />*/}
 					<Route
 						path="/home"
@@ -65,8 +69,18 @@ function App() {
 						}
 					/>
 					{/*<Route path="/booking" element={ <Booking /> } />*/}
-					<Route path="/add_destination" element={ accessToken ? <AddDestination /> : <Login /> } />
-					<Route path="/destinations/city/:cityName" element={<CityDestination />} />
+					<Route
+						path="/add_destination"
+						element={accessToken ? <AddDestination /> : <Login />}
+					/>
+					<Route
+						path="/destinations/city/:cityName"
+						element={<CityDestination />}
+					/>
+					<Route
+						path="/properties/list-property"
+						element={<ListProperty />}
+					/>
 					<Route
 						path="/booking"
 						element={

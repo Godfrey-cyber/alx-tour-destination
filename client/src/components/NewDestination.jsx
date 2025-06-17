@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const NewDestination = ({ destination }) => {
 	return (
@@ -9,40 +9,61 @@ const NewDestination = ({ destination }) => {
 					<div className="grid grid-cols-12 gap-x-2 h-full">
 						{/*<div className="bg-amber-400">Hello span left</div>*/}
 						<span className="flex flex-col col-span-8 h-full w-full">
-							<img src={destination?.images?.[0]} alt="" className="h-full w-full rounded-md" />
+							<img
+								src={destination?.images?.[0]}
+								alt=""
+								className="h-full w-full rounded-md"
+							/>
 						</span>
 						<div className="flex flex-col col-span-4 space-y-3 h-full bg-red-400">
 							<span className="flex h-48 w-full rounded-md">
-								<img src={destination?.images?.[1]} alt="" className="h-full w-full rounded-md bg-pink-200" />
+								<img
+									src={destination?.images?.[1]}
+									alt=""
+									className="h-full w-full rounded-md bg-pink-200"
+								/>
 							</span>
 							<span className="flex h-46 w-full rounded-md">
-								<img src={destination?.images?.[2]} alt="" className="h-full w-full rounded-md bg-pink-200" />
+								<img
+									src={destination?.images?.[2]}
+									alt=""
+									className="h-full w-full rounded-md bg-pink-200"
+								/>
 							</span>
 						</div>
 					</div>
 					<div className="grid grid-cols-5 gap-x-2 ">
-						{destination && destination?.images?.map(image => (
-							<img src={image} key={image} alt="" className="h-full w-full rounded-sm bg-pink-200" />
-						))}
+						{destination &&
+							destination?.images?.map(image => (
+								<img
+									src={image}
+									key={image}
+									alt=""
+									className="h-full w-full rounded-sm bg-pink-200"
+								/>
+							))}
 					</div>
 				</div>
 
 				<div className="flex flex-col col-span-4 h-96 bg-white w-full">
-					<div className="flex flex-col border border-gray-300 rounded-sm">
-						
-					</div>
+					<div className="flex flex-col border border-gray-300 rounded-sm"></div>
 					<div className="bg-red-400">Hello span bottom</div>
 				</div>
 			</div>
 			<div className="grid grid-cols-5 gap-3 my-4">
 				{destination?.amenities?.map(item => (
-					<span key={item} className="flex items-center space-x-2 border border-gray-300 rounded-sm px-3 py-4">
-						<p className="text-xs font-semibold text-gray-700">{item}</p>
+					<span
+						key={item}
+						className="flex items-center space-x-2 border border-gray-300 rounded-sm px-3 py-4"
+					>
+						<p className="text-xs font-semibold text-gray-700">
+							{item}
+						</p>
 					</span>
 				))}
 			</div>
 		</section>
-	)
-}
+	);
+};
 
-export default NewDestination
+export default NewDestination;

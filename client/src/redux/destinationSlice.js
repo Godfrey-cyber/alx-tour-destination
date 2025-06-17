@@ -18,12 +18,11 @@ const destinationSlice = createSlice({
 		destinationStart: state => {
 			state.error = false;
 			isUploading = true;
-			state.destination = [],
-			success = false;
+			(state.destination = []), (success = false);
 		},
 		destinationSuccess: (state, action) => {
 			state.error = false;
-			state.destination = action.payload;;
+			state.destination = action.payload;
 			isUploading = false;
 			success = true;
 		},
@@ -35,11 +34,8 @@ const destinationSlice = createSlice({
 	},
 });
 
-export const {
-	destinationStart,
-	destinationSuccess,
-	destinationFailure,
-} = destinationSlice.actions;
+export const { destinationStart, destinationSuccess, destinationFailure } =
+	destinationSlice.actions;
 export const selectDestination = state => state.destination.destination;
 
 export default destinationSlice.reducer;

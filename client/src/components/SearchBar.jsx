@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { MdOutlineChevronLeft, MdOutlineChevronRight } from 'react-icons/md';
-import { FaLocationCrosshairs } from "react-icons/fa6";
-import { IoLocationOutline } from "react-icons/io5";
+import { FaLocationCrosshairs } from 'react-icons/fa6';
+import { IoLocationOutline } from 'react-icons/io5';
 import BookingModal from './BookingModal.jsx';
 import LocationModal from './LocationModal.jsx';
 import { axiosInstance } from '../utilities/utiles.js';
@@ -172,7 +172,8 @@ const SearchBar = ({ onSubmit }) => {
 									>
 										<IoLocationOutline className="h-5 w-5 text-gray-600 mr-2" />
 										{dest.title} — {dest.location.city},{' '}
-										{dest.location.country} | {dest.category}, {dest.amenities}
+										{dest.location.country} |{' '}
+										{dest.category}, {dest.amenities}
 									</li>
 								))}
 							</ul>
