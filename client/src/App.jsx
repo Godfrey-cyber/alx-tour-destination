@@ -79,7 +79,7 @@ function App() {
 					/>
 					<Route
 						path="/properties/list-property"
-						element={<ListProperty />}
+						element={accessToken ? <ListProperty /> : <Navigate to="/login" />}
 					/>
 					<Route
 						path="/booking"
