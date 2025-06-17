@@ -24,7 +24,7 @@ const destinationSchema = new mongoose.Schema({
 			index: '2dsphere',
 		},
 	},
-	images: [String], // Array of image URLs
+	images: [String],
 	pricePerNight: {
 		type: Number,
 		required: true,
@@ -33,10 +33,10 @@ const destinationSchema = new mongoose.Schema({
 		type: Number,
 		required: true,
 	},
-	amenities: [String], // e.g. ['WiFi', 'Parking', 'Pool']
+	amenities: [String],
 	category: {
 		type: String,
-		enum: ['Beach', 'Eco', 'Mountain', 'City', 'Countryside', 'Desert', 'Historic', 'Luxury', 'Generic', 'Cultural'],
+		// enum: ['Beach', 'Eco', 'Mountain', 'City', 'Countryside', 'Desert', 'Historic', 'Luxury', 'Cultural'],
 		default: 'Generic',
 	},
 	host: {
@@ -46,9 +46,9 @@ const destinationSchema = new mongoose.Schema({
 	},
 	reviews: [
 		{
-			type: mongoose.Schema.Types.ObjectId, 
+			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Review',
-		}
+		},
 	],
 	averageRating: {
 		type: Number,

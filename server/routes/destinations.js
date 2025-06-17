@@ -1,4 +1,11 @@
-import { addDestination, destinations, destination, editDestination, myDestinations, cityDestinations } from '../controllers/destinations.js'
+import {
+	addDestination,
+	destinations,
+	destination,
+	editDestination,
+	myDestinations,
+	cityDestinations,
+} from '../controllers/destinations.js'
 import { authenticate, restrictTo } from '../utilities/middleware.js'
 // import { apiLimiter } from "../middleware/rateLimiter.js";
 import express from 'express'

@@ -16,26 +16,28 @@ dotenv.config()
 const app = express()
 app.use(express.json())
 app.use(cookieParser())
-const allowedOrigins = [
-  "https://alx-tour-destination.vercel.app", 
-  "http://localhost:5173"
-]
+const allowedOrigins = ['https://alx-tour-destination.vercel.app', 'http://localhost:5173']
 app.use(
 	cors({
 		origin: function (origin, callback) {
-	      	// allow requests with no origin (like mobile apps, curl, Postman)
-	      	if (!origin) return callback(null, true)
-	      	if (allowedOrigins.includes(origin)) {
-	        	return callback(null, true)
-	      	} else {
-	        	return callback(new Error("CORS not allowed from this origin ->: " + origin))
-	      	}
-    	},
-    	credentials: true,
+			// allow requests with no origin (like mobile apps, curl, Postman)
+			if (!origin) return callback(null, true)
+			if (allowedOrigins.includes(origin)) {
+				return callback(null, true)
+			} else {
+				return callback(new Error('CORS not allowed from this origin ->: ' + origin))
+			}
+		},
+		credentials: true,
 	})
 )
 
 connectDb()
+
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.originalUrl}`);
+  next();
+});
 
 app.use('/api/v1/users', userRoutes)
 app.use('/api/v1/auth', authRoutes)
