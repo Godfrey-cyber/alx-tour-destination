@@ -50,7 +50,7 @@ const DestinationHeader = () => {
 							{user && user?.lastName} {user && user?.firstName}
 						</p>
 						<p className="text-xs font-normal text-blue-500">
-							Genius Level 1
+							Genius Level 5
 						</p>
 					</span>
 				</div>
