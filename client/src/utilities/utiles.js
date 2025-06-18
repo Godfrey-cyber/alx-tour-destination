@@ -1,9 +1,9 @@
 import axios from 'axios';
 // an axios instance 
+
 export const axiosInstance = axios.create({
-	baseURL: 'https://alx-tour-destination.onrender.com/api/v1', 
-	// baseURL: 'http://localhost:5000/api/v1',
-	withCredentials: true,
+  baseURL: import.meta.env.VITE_API_URL,
+  withCredentials: true,
 });
 
 export const showcaseContent = [
