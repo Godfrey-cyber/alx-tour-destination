@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const axiosInstance = axios.create({
-	baseURL: 'https://alx-tour-destination.onrender.com/api/v1',
+	baseURL: 'https://alx-tour-destination.onrender.com/api/v1', 
 	// baseURL: 'http://localhost:5000/api/v1',
 	withCredentials: true,
 });
@@ -106,3 +106,4 @@ export const tours = [
 		image: 'https://images.pexels.com/photos/2166553/pexels-photo-2166553.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
 	},
 ];
+>>>>>>> login/feature
