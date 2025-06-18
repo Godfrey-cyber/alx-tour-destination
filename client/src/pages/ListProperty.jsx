@@ -8,8 +8,6 @@ import { useSelector } from 'react-redux'
 // files
 import DestinationHeader from '../components/DestinationHeader.jsx';
 import { axiosInstance } from "../utilities/utiles.js"
-const cloudname  = 'du1twfax7'
-// CLOUDINARY_URL=cloudinary://633536413291711:nTNA6BP8mafwhDMTDngfLOUHL44@du1twfax7"
 const ListProperty = () => {
 	const [uploading, setUploading] = useState(false);
 	const { user, loading, error, accessToken, isAuthenticated } = useSelector(
@@ -126,9 +124,9 @@ const ListProperty = () => {
 	    const formData = new FormData();
 	    formData.append('file', file);
 	    formData.append('upload_preset', 'godfrey-preset'); // 🔁 Replace
-	    formData.append('cloud_name', 'du1twfax7');          // 🔁 Replace
+	    formData.append('cloud_name', import.meta.env.VITE_CLOUDINARY_URL);          // 🔁 Replace
 
-	    const { data } = await axios.post(`https://api.cloudinary.com/v1_1/du1twfax7/image/upload`, formData);
+	    const { data } = await axios.post(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_URL}/image/upload`, formData);
 
 	    console.log(data)
 	    urls.push(data.secure_url);
