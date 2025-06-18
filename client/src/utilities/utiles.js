@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+// axios instance 
 export const axiosInstance = axios.create({
 	baseURL: 'https://alx-tour-destination.onrender.com/api/v1', 
 	// baseURL: 'http://localhost:5000/api/v1',
