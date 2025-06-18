@@ -123,10 +123,10 @@ const ListProperty = () => {
 	  for (const file of files) {
 	    const formData = new FormData();
 	    formData.append('file', file);
-	    formData.append('upload_preset', 'godfrey-preset'); // 🔁 Replace
-	    formData.append('cloud_name', import.meta.env.VITE_CLOUDINARY_URL);          // 🔁 Replace
+	    formData.append('upload_preset', import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET); // 🔁 Replace
+	    formData.append('cloud_name', import.meta.env.VITE_CLOUDINARY_NAME);          // 🔁 Replace
 
-	    const { data } = await axios.post(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_URL}/image/upload`, formData);
+	    const { data } = await axios.post(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_NAME}/image/upload`, formData);
 
 	    console.log(data)
 	    urls.push(data.secure_url);
