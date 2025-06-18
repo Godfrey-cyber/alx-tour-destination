@@ -22,7 +22,7 @@ const DestByCity = () => {
 		<div className="col-span-12 md:col-span-9 h-20 rounded-md p-3">
 			<div className="grid grid-cols-12 md:grid-cols-2 lg:grid-cols-3 gap-4">
 				{!destinations
-					? 'No Destinations'
+					? <p className="text-sm font-bold text-gray-800 flex flex-col items-center justify-center w-full">No Destinations</p>
 					: destinations?.map(data => (
 							<div
 								key={data._id}
