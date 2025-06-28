@@ -9,4 +9,4 @@ git add .
 git commit -m "$commit_message"
 git push
 
-echo "✅ Changes pushed successfully!"
+echo "✅ Changes pushed successfully! $commit_message"
