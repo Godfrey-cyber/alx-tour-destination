@@ -4,29 +4,29 @@ import { axiosInstance } from '../utilities/utiles.js';
 
 // Initial state
 const initialState = {
-	destination: [],
+	job: [],
 	isUploading: false,
 	success: false,
 	error: null,
 };
 
 // Slice
-const destinationSlice = createSlice({
-	name: 'destination',
+const jobSlice = createSlice({
+	name: 'job',
 	initialState,
 	reducers: {
-		destinationStart: state => {
+		jobStart: state => {
 			state.error = false;
 			isUploading = true;
-			(state.destination = []), (success = false);
+			(state.job = []), (success = false);
 		},
-		destinationSuccess: (state, action) => {
+		jobSuccess: (state, action) => {
 			state.error = false;
-			state.destination = action.payload;
+			state.job = action.payload;
 			isUploading = false;
 			success = true;
 		},
-		destinationFailure: (state, action) => {
+		jobFailure: (state, action) => {
 			state.error = action.payload;
 			state.isUploading = false;
 			success = false;
@@ -34,8 +34,8 @@ const destinationSlice = createSlice({
 	},
 });
 
-export const { destinationStart, destinationSuccess, destinationFailure } =
-	destinationSlice.actions;
-export const selectDestination = state => state.destination.destination;
+export const { jobStart, jobSuccess, jobFailure } =
+	jobSlice.actions;
+export const selectJob = state => state.job.job;
 
-export default destinationSlice.reducer;
+export default jobSlice.reducer;
