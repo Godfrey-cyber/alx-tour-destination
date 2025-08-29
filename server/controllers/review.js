@@ -8,8 +8,6 @@ export const addReview = async (req, res, next) => {
 
 		const savedReview = await Review.create({ rating, comment, user: req.userId, destination })
 
-		// await savedReview.populate('user', 'name email')
-
 		// pushing review in the destination
 		await Destination.findByIdAndUpdate(destination, { $push: { reviews: savedReview._id } }, { new: true })
 		res.status(201).json({
@@ -22,7 +20,7 @@ export const addReview = async (req, res, next) => {
 	} catch (error) {
 		res.status(401).json({ success: false, error, status: 401 })
 		console.log(error)
-		next()
+		next(error)
 	}
 }
 // all reviews
@@ -36,7 +34,7 @@ export const reviews = async (req, res, next) => {
 		})
 	} catch (error) {
 		res.status(401).json({ success: false, error, status: 401 })
-		next()
+		next(error)
 	}
 }
 // Get Reviews by Destination
@@ -51,6 +49,6 @@ export const destinationReviews = async (req, res, next) => {
 		})
 	} catch (error) {
 		res.status(401).json({ success: false, error, status: 401 })
-		next()
+		next(error)
 	}
 }

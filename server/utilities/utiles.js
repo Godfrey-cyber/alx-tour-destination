@@ -41,6 +41,14 @@ export const mongoDbConnection = (res) => {
 	}
 }
 
+export const allowedUpdates = (destination, requestObject, allowedfields) => {
+	for(const key of allowedfields) {
+		if (requestObject[key] !== undefined) {
+			destination[key] = requestObject[key]
+		}
+	}
+}
+
 // export const sendEmail = async (to, subject, text) => {
 //   const transporter = nodemailer.createTransport({
 //     service: 'gmail',

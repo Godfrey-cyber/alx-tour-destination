@@ -2,6 +2,7 @@
 import Destination from '../models/Destination.js'
 import Counter from '../models/Counter.js'
 import slugify from 'slugify'
+import { allowedUpdates } from "../utilities/utiles.js"
 
 export const addDestination = async (req, res, next) => {
 	try {
@@ -206,7 +207,7 @@ export const destination = async (req, res, next) => {
 		})
 	} catch (error) {
 		console.log(error)
-		next()
+		next(error)
 	}
 }
 
@@ -231,11 +232,7 @@ export const editDestination = async (req, res, next) => {
 			'images',
 		]
 
-		for (const key of allowedFields) {
-			if (req.body[key] !== undefined) {
-				destination[key] = req.body[key]
-			}
-		}
+		allowedUpdates(destination, req.body, allowedFields)
 		const updated = await destination.save()
 		res.status(200).json({
 			success: true,
