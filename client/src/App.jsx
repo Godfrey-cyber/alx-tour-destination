@@ -53,7 +53,7 @@ function App() {
 					<Route
 						path="/home"
 						element={
-							accessToken ? <Home /> : <Navigate to="/login" />
+							<Home /> 
 						}
 					/>
 					<Route
