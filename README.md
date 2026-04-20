@@ -26,6 +26,26 @@
 	# Start the development server
 		npm start
 
+# server environment variables
+	- MONGO_URL=mongo_db_url
+
+	- ACCESS_TOKEN_SECRET=put_your_credentials_here
+	- REFRESH_TOKEN_SECRET=put_your_credentials_here
+	- JWT_TOKEN=put_your_credentials_here
+
+	- ACCESS_TOKEN_EXPIRY=put_your_credentials_here
+	- REFRESH_TOKEN_EXPIRY=put_your_credentials_here
+
+	- CLIENT_URL=put_your_credentials_here
+
+	- PORT=put_your_credentials_here
+
+	- NODE_ENV=put_your_credentials_here
+
+	- REDIS_HOST=put_your_credentials_here
+	- REDIS_PORT=put_your_credentials_here
+
+
 # usage
 	- Visit the homepage to explore available tours.
 
